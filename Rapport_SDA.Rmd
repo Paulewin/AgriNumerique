@@ -1,0 +1,362 @@
+---
+title: Rapport
+author: "PAULE DENAKPO"
+date: "`r Sys.Date()`"
+bibliography: references.bib
+biblio-style: APA
+citation_package: biblatex
+output: 
+  html_document: 
+    toc: true
+    number_sections: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = "") 
+
+```
+
+
+
+# Niveau d’accès des producteurs à l’information climatique et obstacles à l’adoption de solutions numériques et agricoles
+
+
+```{r, echo=FALSE}
+library(readr)
+simulation <- read.csv("Simulation_AgriN.csv")
+simulation$sexe <- as.factor(simulation$sexe)
+simulation$age <- as.factor(simulation$age)
+simulation$etude <- as.factor(simulation$etude)
+simulation$vilage <- as.factor(simulation$vilage)
+simulation$commune <- as.factor(simulation$commune)
+simulation$type_agri <- as.factor(simulation$type_agri)
+simulation$culture1 <- as.factor(simulation$culture1)
+simulation$culture2 <- as.factor(simulation$culture2)
+simulation$culture3 <- as.factor(simulation$culture3)
+simulation$unite_superficie_maïs <- as.factor(simulation$unite_superficie_maïs)
+simulation$unite_superficie_total <- as.factor(simulation$unite_superficie_total)
+simulation$expérience <- as.factor(simulation$expérience)
+simulation$phenomene_clima_obs <- as.factor(simulation$phenomene_clima_obs)
+simulation$liste_phenomene_clima_obs <- as.factor(simulation$liste_phenomene_clima_obs)
+simulation$moyen_gestion_risques <- as.factor(simulation$moyen_gestion_risques)
+simulation$moyen1 <- as.factor(simulation$moyen1)
+simulation$Moyen2 <- as.factor(simulation$Moyen2)
+simulation$Moyen3 <- as.factor(simulation$Moyen3)
+simulation$possession_telephone <- as.factor(simulation$possession_telephone)
+simulation$acces_internet <- as.factor(simulation$acces_internet)
+simulation$Utilisation_outils_numeriques <- as.factor(simulation$Utilisation_outils_numeriques)
+simulation$precisez_lesquels <- as.factor(simulation$precisez_lesquels)
+simulation$frequence_appli_mobiles <- as.factor(simulation$frequence_appli_mobiles)
+simulation$frequence_plateformes_web. <- as.factor(simulation$frequence_plateformes_web.)
+simulation$frequence_SMS_alerte.pretoce. <- as.factor(simulation$frequence_SMS_alerte.pretoce.)
+simulation$frequence_reseaux_sociaux.agricoles <- as.factor(simulation$frequence_reseaux_sociaux.agricoles)
+simulation$frequence_autres_outils <- as.factor(simulation$frequence_autres_outils)
+simulation$obstacles_au_numerique <- as.factor(simulation$obstacles_au_numerique)
+simulation$informations_souhaitee_recevoir <- as.factor(simulation$informations_souhaitee_recevoir)
+simulation$forme_reception_préfere <- as.factor(simulation$forme_reception_préfere)
+simulation$langues_adaptes <- as.factor(simulation$langues_adaptes)
+simulation$Langue_locale_majoritaire <- as.factor(simulation$Langue_locale_majoritaire)
+simulation$fonctionalite_application <- as.factor(simulation$fonctionalite_application)
+simulation$caracteristique_principale_application <- as.factor(simulation$caracteristique_principale_application)
+simulation$gestionnaire <- as.factor(simulation$gestionnaire)
+simulation$appli_numerique_gere_aleas_climatiques <- as.factor(simulation$appli_numerique_gere_aleas_climatiques)
+simulation$conditions_utilisation <- as.factor(simulation$conditions_utilisation)
+simulation$contribution_symbolique <- as.factor(simulation$contribution_symbolique)
+simulation$suggestions <- as.factor(simulation$suggestions)
+
+```
+
+## Vue d'ensemble sur la possession de téléphone et l'accès des agiculteurs à internet
+
+Le tableau ci dessous résume la possession de téléphone et les proportions d'accès des agiculteurs à internet
+
+```{r, echo=FALSE}
+summary(simulation[, 22:23])
+```
+
+
+
+```{r, echo=FALSE}
+library(ggplot2)
+ggplot(simulation, aes(x = possession_telephone, fill = possession_telephone)) + geom_bar(position = "dodge") + labs(title = "Histogramme de possession d'un téléphone", x = "Possède un téléphone", y = "Proportion", fill = "Accès à l'info") + theme_minimal()
+```
+
+
+```{r, echo=FALSE}
+ggplot(simulation, aes(x = acces_internet, fill = acces_internet)) + geom_bar(position = "dodge") + labs(title = "Histogramme d'accès à Internet", x = "A accès à Internet", y = "Nombre de producteurs", fill = "Accès à internet") + theme_light()
+```
+
+
+
+## Répartition de l'accès à internet et au telephone selon le sexe
+
+Tableau: Accès à internet et au telephone selon le sexe
+```{r, echo=FALSE}
+tab_sexe_tel <- table(simulation$sexe, simulation$possession_telephone)
+print(tab_sexe_tel)
+tab_sexe_net <- table(simulation$sexe, simulation$acces_internet)
+cat("Pourcentage de possession de téléphone par sexe \n")
+round(prop.table(tab_sexe_tel, 1) * 100, 1)
+cat("Pourcentage d'accès à internet par sexe \n")
+round(prop.table(tab_sexe_net, 1) * 100, 1)
+print(tab_sexe_net)
+```
+ 
+## Accès à internet et au téléphone selon le niveau d'instruction
+```{r, echo=FALSE}
+tab_scol_tel <- table(simulation$etude, simulation$possession_telephone)
+print(tab_scol_tel)
+tab_scol_net <- table(simulation$etude, simulation$acces_internet)
+print(tab_scol_net)
+cat("Accès à internet selon le niveau d'instruction\n")
+round(prop.table(tab_scol_net, 1) * 100, 1)
+cat("Possession de telephone selon le niveau d'instruction \n")
+round(prop.table(tab_scol_tel, 1) * 100, 1)
+```
+### Relations de dépendance entre les facteurs socio-démographiques et l'accès à Internet et au telephone 
+
+```{r, echo=FALSE}
+test_fisher <- fisher.test(table(simulation$acces_internet, simulation$possession_telephone))
+cat(" Résultat du Test de Fisher pour accès internet selon la possession de telephone \n")
+print(test_fisher)
+
+test_fisher_scol_net <- fisher.test(table(simulation$etude, simulation$acces_internet))
+cat(" Résultat du Test de Fisher pour accès internet selon l'instruction \n")
+print(test_fisher_scol_net)
+
+test_fisher_scol_tel <- fisher.test(table(simulation$etude, simulation$possession_telephone))
+cat(" Résultat du Test de Fisher pour possession de telephone selon l'instruction \n")
+print(test_fisher_scol_tel)
+
+test_fisher_com_net <- fisher.test(table(simulation$commune, simulation$acces_internet))
+cat(" Résultat du Test de Fisher pour accès internet selon la commune \n")
+print(test_fisher_com_net)
+
+test_fisher_com_tel <- fisher.test(table(simulation$commune, simulation$possession_telephone))
+cat(" Résultat du Test de Fisher pour possession de telephone selon la commune \n")
+print(test_fisher_com_tel)
+
+
+test_fisher_culture_tel <- fisher.test(table(simulation$culture1, simulation$possession_telephone))
+cat(" Résultat du Test de Fisher pour possession de telephone selon le type de culture \n")
+print(test_fisher_culture_tel)
+
+test_fisher_culture_net <- fisher.test(table(simulation$culture1, simulation$acces_internet))
+cat(" Résultat du Test de Fisher pour accès internet selon le type de culture \n")
+print(test_fisher_culture_net)
+```
+
+Le test de Fisher révèle de relation statistiquement significative entre la possession d'un téléphone et le type de culture pratiqué d'une part, et entre l'accès à internet et la commune d'autre part.  Ce résultat suggère que la possession de matériel (telephone) dépends du revenu et l'accès à internet est fonction de la géographie (couverture réseau).
+
+## Disparité d'accès à Internet et au telephone par Commune et par culture pratiquée
+```{r, echo=FALSE}
+library(ggplot2)
+ggplot(simulation, aes(x = commune, fill = acces_internet)) +
+  geom_bar(position = "fill") +
+  scale_y_continuous(labels = scales::percent) +
+  labs(title = "Disparité d'accès à Internet par Commune",
+       y = "Pourcentage", x = "Communes") +
+  theme_minimal()
+
+library(ggplot2)
+ggplot(simulation, aes(x = culture1, fill = possession_telephone)) +
+  geom_bar(position = "fill") +
+  scale_y_continuous(labels = scales::percent) +
+  labs(title = "Disparité de possession de telephone par culture",
+       y = "Pourcentage", x = "Communes") +
+  theme_minimal()
+
+```
+
+# Analyse de l'utilisation des outils numériques
+## utilisation par commune
+Nous analysons dans un premier temps quels outils numériques sont les plus utilisés dans chaque commune à partir de la moyenne. L'outil le plus utilisé dans l'ensemble des communes est la plateforme web
+```{r, include=FALSE}
+simulation$score_appli_mobile <- as.numeric(as.factor(simulation$frequence_appli_mobiles))
+simulation$score_plateforme_web <- as.numeric(as.factor(simulation$frequence_plateformes_web.))
+simulation$score_SMS_alerte <- as.numeric(as.factor(simulation$frequence_SMS_alerte.pretoce.))
+simulation$score_resaux_sociaux <- as.numeric(as.factor(simulation$frequence_reseaux_sociaux.agricoles))
+simulation$score_autre_outil <- as.numeric(as.factor(simulation$frequence_autres_outils))
+```
+
+
+```{r, echo=FALSE}
+aggregate(score_appli_mobile ~ commune, data = simulation, FUN = mean)
+aggregate(score_plateforme_web ~ commune, data = simulation, FUN = mean)
+aggregate(score_SMS_alerte ~ commune, data = simulation, FUN = mean)
+aggregate(score_resaux_sociaux ~ commune, data = simulation, FUN = mean)
+aggregate(score_autre_outil ~ commune, data = simulation, FUN = mean)
+```
+
+Il n'y a pas de différence statistique dans l'utilisation des outils d'une commune à l'autre
+```{r, echo=FALSE}
+anova_appli_comune <- aov(score_appli_mobile ~ commune, data = simulation) 
+summary(anova_appli_comune)
+
+anova_web_comune <- aov(score_plateforme_web ~ commune, data = simulation) 
+summary(anova_web_comune)
+
+anova_SMS_comune <- aov(score_SMS_alerte ~ commune, data = simulation) 
+summary(anova_SMS_comune)
+
+anova_reseau_comune <- aov(score_resaux_sociaux ~ commune, data = simulation) 
+summary(anova_reseau_comune)
+
+anova_autre_outil_comune <- aov(score_autre_outil ~ commune, data = simulation) 
+summary(anova_autre_outil_comune)
+```
+
+
+
+## Utulisation par culture pratiquée
+La plateforme web reste l'outil auquel la majorité des agriculteurs ont recourt, quelque soit la culture pratiquée.
+```{r, echo=FALSE}
+aggregate(score_appli_mobile ~ culture1, data = simulation, FUN = mean)
+aggregate(score_plateforme_web ~ culture1, data = simulation, FUN = mean)
+aggregate(score_SMS_alerte ~ culture1, data = simulation, FUN = mean)
+aggregate(score_resaux_sociaux ~ culture1, data = simulation, FUN = mean)
+aggregate(score_autre_outil ~ culture1, data = simulation, FUN = mean)
+```
+Il y  a de différence statistique dans l'utilisation des outils numériques à savoir: SMS alete, réseaux sociaux en fonction de la culture pratiquée. 
+En somme, ls test de dépendance de la possession et de l'accès au telephone n'est pas significatif  alors que l'usage des outls numériques l'est. Cela veut dire que la barrière est l'accès (posséder le téléphone).
+Mais qu'une fois qu'ils l'ont, ils l'utilisent tous de la même façon.
+
+```{r, echo=FALSE}
+anova_appli_culture <- aov(score_appli_mobile ~ culture1, data = simulation) 
+summary(anova_appli_culture)
+
+anova_web_culture <- aov(score_plateforme_web ~ culture1, data = simulation) 
+summary(anova_web_culture)
+
+anova_SMS_culture <- aov(score_SMS_alerte ~ culture1, data = simulation) 
+summary(anova_SMS_culture)
+
+anova_reseau_culture <- aov(score_resaux_sociaux ~ culture1, data = simulation) 
+summary(anova_reseau_culture)
+
+anova_autre_outil_culture <- aov(score_autre_outil ~ culture1, data = simulation) 
+summary(anova_autre_outil_culture)
+```
+ 
+
+## Typologie des producteurs selon leur niveau de connexion
+Nous avons regroupé les agriculteurs en trois catégories:
+* Le connecté * (niveau d'étude supérieur, agé de 25à 40ans et utilisant régulièrement les outils numériques)
+* L'intermédiaire* (niveau d'étude primaire, agé de 25 à 40 ans et utilisant les outils numériques )
+* Le non connecté* (Aucun niveau d'étude, agé de 41 à 60 ans n'utilisant pas les outils numériques)
+
+```{r, echo=FALSE}
+simulation$connecte_num <- ifelse(simulation$acces_internet == "Oui", 1, 0)
+aggregate(connecte_num ~ sexe, data = simulation, FUN = mean)
+aggregate(connecte_num ~ etude, data = simulation, FUN = mean)
+aggregate(connecte_num ~ age, data = simulation, FUN = mean)
+aggregate(connecte_num ~ culture1, data = simulation, FUN = mean)
+
+```
+
+
+
+```{r, include=FALSE}
+typologie_finale <- aggregate(connecte_num ~ sexe + etude + age + commune + culture1, data = simulation, FUN = mean)
+typologie_finale <- typologie_finale[order(-typologie_finale$connecte_num), ]
+print(typologie_finale)
+```
+
+# Obstacles à l'accès au numérique
+
+Le principal obstacle au numérique est la langue qui entraine une incompréhension des solutions proposées. 
+```{r, echo=FALSE}
+obstacles_liste <- c("Manque de réseau", "Cout d'accès à internet", "Manque de formation", "Langue/Compréhension", "Manque de pertinence des informations", "Autre")
+counts <- sapply(obstacles_liste, function(x) sum(grepl(x, simulation$obstacles_au_numerique, ignore.case = TRUE)))
+pourcent_obstacle <- (counts / nrow(simulation)) * 100
+print(pourcent_obstacle)
+```
+
+```{r, echo=FALSE}
+df_graph <- data.frame( Obstacle = obstacles_liste, Nombre = sapply(obstacles_liste, function(x) sum(grepl(x, simulation$obstacles_au_numerique, ignore.case = TRUE))) )
+ggplot(df_graph, aes(x = reorder(Obstacle, Nombre), y = Nombre, fill = Obstacle)) + geom_bar(stat = "identity") + coord_flip() + labs(title = "Principaux obstacles au numérique", x = "Obstacles", y = "Nombre de citations") + theme_minimal() + theme(legend.position = "none")
+```
+
+```{r, include=FALSE}
+library(dplyr)
+
+library(ggplot2)
+
+```
+
+```{r, echo=FALSE}
+cultures <- unique(simulation$culture1) 
+obstacles <- c("Manque de réseau", "Cout d'accès à internet", "Manque de formation", "Langue/Compréhension", "Manque de pertinence des informations", "Autre")
+
+df_croise <- expand.grid(Culture = cultures, Obstacle = obstacles)
+df_croise$Nombre <- mapply(function(c, o) {
+  simulation %>% filter(culture1 == c, grepl(o, obstacles_au_numerique)) %>% nrow()
+}, df_croise$Culture, df_croise$Obstacle)
+
+```
+
+```{r, echo=FALSE}
+total_par_culture <- as.data.frame(table(simulation$culture1)) 
+colnames(total_par_culture) <- c("Culture", "Total")
+df_pourcent <- merge(df_croise, total_par_culture, by = "Culture")
+df_pourcent$Pourcentage <- (df_pourcent$Nombre / df_pourcent$Total) * 100
+ggplot(df_pourcent, aes(x = Culture, y = Pourcentage, fill = Obstacle)) + geom_bar(stat = "identity", position = "dodge") + theme_minimal() + labs(title = "Intensité des obstacles par culture (%)", y = "Pourcentage de citation")
+```
+
+
+
+
+Les producteurs de tomates sont les plus confrontés à la barrière de langue.Les obstacles (réseau, coût) sont uniformes. Ils frappent tout le monde avec la même intensité relative, peu importe la culture. Il n'y a pas une filière plus favorisée qu'une autre.
+Cela confirme les résultats des tests d'inférence (p > 0.5)
+Puisque  les obstacles sont assez homogènes, la différence se jouera sur l'adéquation entre le profil social et la solution préférée.
+
+# Solution
+## Typologie des solutions
+```{r, echo=FALSE}
+information_liste <- c("Prévisions météorologiques localisées", "Alertes  précoces (sècheresse, inondation, ravageurs )", "Conseils techniques de  production", "Gestion de l'irrigation et de l'eau", "Accès au crédit ou à l' assurance agricole")
+reception_liste <- c("SMS", "Message vocaux", "Application mobile", "Site web", "Réseaux sociaux", "Radio locale")
+langue_liste <- c("Francais", "Images/Pictogrammes", "Audio", "Langues locales")
+fonctionalite_liste <- c("D'enregistrer  vos données de culture (dates, rendements,  superficies)", "D'échanger avec d'autres producteurs", "D' accéder à des formations ou tutoriels en ligne", "De signaler des problèmes ( maladies, manque d'eau etc...)", "D' obtenir des conseils personnalisés")
+gestion_liste <- c("Coopérative/groupement", "ONG", "Ministère de l'Agriculture", "Recherche", "Entreprise privée")
+
+counts_information <- sapply(information_liste, function(x) { sum(grepl(x, simulation$informations_souhaitee_recevoir, ignore.case = TRUE)) })
+counts_reception <- sapply(reception_liste, function(x) { sum(grepl(x, simulation$forme_reception_préfere, ignore.case = TRUE)) })
+counts_langue <- sapply(langue_liste, function(x) { sum(grepl(x, simulation$langues_adaptes, ignore.case = TRUE)) })
+counts_fonctionalite <- sapply(fonctionalite_liste, function(x) { sum(grepl(x, simulation$fonctionalite_application, ignore.case = TRUE)) })
+counts_gestion <- sapply(gestion_liste, function(x) { sum(grepl(x, simulation$gestionnaire, ignore.case = TRUE)) })
+
+df_information <- data.frame(Information = information_liste, Nombre = counts_information)
+df_reception <- data.frame(Reception = reception_liste, Nombre = counts_reception)
+df_langue <- data.frame(Langue = langue_liste, Nombre = counts_langue)
+df_fonctionalite <- data.frame(Fonctionalite = fonctionalite_liste, Nombre = counts_fonctionalite)
+df_gestion <- data.frame(Gestion = gestion_liste, Nombre = counts_gestion)
+print(df_information)
+print(df_reception)
+print(df_langue)
+print(df_fonctionalite)
+print(df_gestion)
+summary(simulation$Langue_locale_majoritaire)
+```
+
+## Solution ideale
+Les agriulteurs désirent une application mobile gérée par Ministère de l'griculture et qui offre prioritairement des conseils techniques de production en langue locale
+```{r, echo=FALSE}
+solution_ideale <- data.frame(
+  Categorie = c("Information prioritaire", "Canal de réception", "Langue préférée", "Fonctionnalité clé", "Gestionnaire de confiance"),
+  Choix_Majoritaire = c(
+    df_information$Information[which.max(df_information$Nombre)],
+    df_reception$Reception[which.max(df_reception$Nombre)],
+    df_langue$Langue[which.max(df_langue$Nombre)],
+    df_fonctionalite$Fonctionalite[which.max(df_fonctionalite$Nombre)],
+    df_gestion$Gestion[which.max(df_gestion$Nombre)]
+  ))
+
+print(solution_ideale)
+```
+
+
+
+# References
+
+
+
