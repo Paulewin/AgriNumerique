@@ -1,0 +1,159 @@
+---
+title: "Caractéristiques socio démographiques"
+author: "Paule DENAKPO"
+date: "`r Sys.Date()`"
+output: 
+  html_document: 
+    toc: true
+    toc_depth: 4
+    number_sections: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+```{r, include=FALSE}
+library(readr)
+simulation <- read.csv("Simulation_AgriN.csv")
+simulation$sexe <- as.factor(simulation$sexe)
+simulation$age <- as.factor(simulation$age)
+simulation$etude <- as.factor(simulation$etude)
+simulation$vilage <- as.factor(simulation$vilage)
+simulation$commune <- as.factor(simulation$commune)
+simulation$type_agri <- as.factor(simulation$type_agri)
+simulation$culture1 <- as.factor(simulation$culture1)
+simulation$culture2 <- as.factor(simulation$culture2)
+simulation$culture3 <- as.factor(simulation$culture3)
+simulation$unite_superficie_maïs <- as.factor(simulation$unite_superficie_maïs)
+simulation$unite_superficie_total <- as.factor(simulation$unite_superficie_total)
+simulation$expérience <- as.factor(simulation$expérience)
+simulation$phenomene_clima_obs <- as.factor(simulation$phenomene_clima_obs)
+simulation$liste_phenomene_clima_obs <- as.factor(simulation$liste_phenomene_clima_obs)
+simulation$moyen_gestion_risques <- as.factor(simulation$moyen_gestion_risques)
+simulation$moyen1 <- as.factor(simulation$moyen1)
+simulation$Moyen2 <- as.factor(simulation$Moyen2)
+simulation$Moyen3 <- as.factor(simulation$Moyen3)
+simulation$possession_telephone <- as.factor(simulation$possession_telephone)
+simulation$acces_internet <- as.factor(simulation$acces_internet)
+simulation$Utilisation_outils_numeriques <- as.factor(simulation$Utilisation_outils_numeriques)
+simulation$precisez_lesquels <- as.factor(simulation$precisez_lesquels)
+simulation$frequence_appli_mobiles <- as.factor(simulation$frequence_appli_mobiles)
+simulation$frequence_plateformes_web. <- as.factor(simulation$frequence_plateformes_web.)
+simulation$frequence_SMS_alerte.pretoce. <- as.factor(simulation$frequence_SMS_alerte.pretoce.)
+simulation$frequence_reseaux_sociaux.agricoles <- as.factor(simulation$frequence_reseaux_sociaux.agricoles)
+simulation$frequence_autres_outils <- as.factor(simulation$frequence_autres_outils)
+simulation$obstacles_au_numerique <- as.factor(simulation$obstacles_au_numerique)
+simulation$informations_souhaitee_recevoir <- as.factor(simulation$informations_souhaitee_recevoir)
+simulation$forme_reception_préfere <- as.factor(simulation$forme_reception_préfere)
+simulation$langues_adaptes <- as.factor(simulation$langues_adaptes)
+simulation$Langue_locale_majoritaire <- as.factor(simulation$Langue_locale_majoritaire)
+simulation$fonctionalite_application <- as.factor(simulation$fonctionalite_application)
+simulation$caracteristique_principale_application <- as.factor(simulation$caracteristique_principale_application)
+simulation$gestionnaire <- as.factor(simulation$gestionnaire)
+simulation$appli_numerique_gere_aleas_climatiques <- as.factor(simulation$appli_numerique_gere_aleas_climatiques)
+simulation$conditions_utilisation <- as.factor(simulation$conditions_utilisation)
+simulation$contribution_symbolique <- as.factor(simulation$contribution_symbolique)
+simulation$suggestions <- as.factor(simulation$suggestions)
+```
+
+# Description globale des caractéristiques
+
+
+```{r}
+library(gtsummary)
+library(dplyr)
+
+tableau_general <- simulation %>%
+  select(sexe, age, etude, commune, type_agri, culture1, superficie_total_finale) %>%
+  tbl_summary(
+    statistic = list(
+      all_continuous() ~ "{mean} ({sd}) [min - max]", # Stats complètes pour l'âge et la surface
+      all_categorical() ~ "{n} ({p}%)"
+    ),
+    label = list(
+      sexe ~ "Genre",
+      age ~ "Âge (ans)",
+      etude ~ "Niveau d'instruction",
+      commune ~ "Localisation",
+      type_agri ~ "Système de production",
+      culture1 ~ "Culture principale",
+      superficie_total_finale ~ "Superficie exploitée"
+    ),
+    missing = "ifany" # Affiche s'il y a des données manquantes
+  ) %>%
+  bold_labels() %>%
+  modify_caption("**Tableau : Caractéristiques générales de l'échantillon**")
+
+# Affichage
+tableau_general
+```
+
+
+
+
+
+
+
+
+```{r}
+library(ggplot2)
+ggplot(simulation, aes(x = age, fill = sexe)) +
+  geom_histogram(binwidth = 5, position = "dodge", color = "white") +
+  labs(title = "Distribution de l'âge par sexe", x = "Âge", y = "Effectif") +
+  theme_minimal()
+```
+
+
+# Analyse du Système de Production
+
+
+les pratiques dominantes
+
+```{r}
+
+ggplot(simulation, aes(x = commune, fill = culture1)) +
+  geom_bar(position = "fill") +
+  labs(title = "Spécialisation des cultures par commune", y = "Proportion") +
+  theme_light()
+
+table_croise <- table(simulation$commune, simulation$culture1)
+test_fisher <- fisher.test(table_croise, simulate.p.value = TRUE)
+print(test_fisher)
+```
+
+la superficie exploitée
+```{r}
+
+ggplot(simulation, aes(x = sexe, y = superficie_total_finale, fill = sexe)) +
+  geom_boxplot() +
+  labs(title = "Superficie exploitée selon le sexe")
+
+table_croise <- table(simulation$sexe, simulation$superficie_total_finale)
+test_fisher <- fisher.test(table_croise, simulate.p.value = TRUE)
+print(test_fisher)
+```
+
+type d'agriculture dépends t- il du niveau d'étude
+```{r}
+
+ggplot(simulation, aes(x = etude, fill = type_agri)) +
+  geom_bar(position = "fill") + # "fill" crée des barres de hauteur égale (100%)
+  scale_y_continuous(labels = scales::percent) + # Affiche des pourcentages en Y
+  labs(
+    title = "Répartition du type d'agriculture selon le niveau d'étude",
+    x = "Niveau d'étude",
+    y = "Proportion (%)",
+    fill = "Type d'agriculture"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) # Incline les textes si besoin
+
+table_croise <- table(simulation$etude, simulation$type_agri)
+test_fisher <- fisher.test(table_croise, simulate.p.value = TRUE)
+print(test_fisher)
+```
+
+
