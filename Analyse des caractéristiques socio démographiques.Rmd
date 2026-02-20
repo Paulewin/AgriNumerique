@@ -15,7 +15,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 
 
-```{r, include=FALSE}
+```{r, echo=FALSE}
 library(readr)
 simulation <- read.csv("Simulation_AgriN.csv")
 simulation$sexe <- as.factor(simulation$sexe)
@@ -62,10 +62,16 @@ simulation$suggestions <- as.factor(simulation$suggestions)
 # Description globale des caractéristiques
 
 
-```{r}
+```{r, include=FALSE}
 library(gtsummary)
 library(dplyr)
 
+
+```
+
+
+
+```{r, echo=FALSE}
 tableau_general <- simulation %>%
   select(sexe, age, etude, commune, type_agri, culture1, superficie_total_finale) %>%
   tbl_summary(
@@ -94,26 +100,18 @@ tableau_general
 
 
 
+ Les communes les plus représentées sont Misserete (41,18 %), Dogbo et Parakou (17,65 % chacune), tandis que Adjohoun, Bonou, Bopa et Ouassa-Péhunco totalisent chacune 5,88 %. La majorité des participants sont des hommes (82,35 %), contre 17,65 % de femmes. L’agriculture mixte domine avec 64,71 % des répondants, contre 35,29 % pour l’agriculture pluviale.
 
-
-
-
-```{r}
-library(ggplot2)
-ggplot(simulation, aes(x = age, fill = sexe)) +
-  geom_histogram(binwidth = 5, position = "dodge", color = "white") +
-  labs(title = "Distribution de l'âge par sexe", x = "Âge", y = "Effectif") +
-  theme_minimal()
-```
 
 
 # Analyse du Système de Production
 
 
-les pratiques dominantes
+## les pratiques dominantes
 
-```{r}
+```{r, echo=FALSE}
 
+library(ggplot2)
 ggplot(simulation, aes(x = commune, fill = culture1)) +
   geom_bar(position = "fill") +
   labs(title = "Spécialisation des cultures par commune", y = "Proportion") +
@@ -124,8 +122,10 @@ test_fisher <- fisher.test(table_croise, simulate.p.value = TRUE)
 print(test_fisher)
 ```
 
-la superficie exploitée
-```{r}
+il n'y a pas de relation entre la commune et la culture pratiquée. Cela signifie que le choix de la culture ne dépend pas de la localisation géographique de l'agriculteur. Un agriculteur à Dogbo a statistiquement les mêmes chances de cultiver de l'ananas qu'un agriculteur à Parakou. Puisque la culture ne change pas selon la commune, il n'est pas utile de créer des solutions spécifiques à chaque région. Une solution numérique "générique" pour les cultures peut fonctionner partout.
+
+## Superficie exploitée
+```{r, echo=FALSE}
 
 ggplot(simulation, aes(x = sexe, y = superficie_total_finale, fill = sexe)) +
   geom_boxplot() +
@@ -136,8 +136,10 @@ test_fisher <- fisher.test(table_croise, simulate.p.value = TRUE)
 print(test_fisher)
 ```
 
-type d'agriculture dépends t- il du niveau d'étude
-```{r}
+Il n'y a aucun lien statistique entre le sexe de l'agriculteur et la superficie de son exploitation. Les femmes ne cultivent pas des surfaces significativement plus petites (ou plus grandes) que les hommes. Pour la solution numérique, cela implique que les fonctionnalités liées à l'arpentage ou à la gestion parcellaire peuvent être standardisées sans distinction de genr
+
+## type d'agriculture et niveau d'étude
+```{r, echo=FALSE}
 
 ggplot(simulation, aes(x = etude, fill = type_agri)) +
   geom_bar(position = "fill") + # "fill" crée des barres de hauteur égale (100%)
@@ -156,4 +158,47 @@ test_fisher <- fisher.test(table_croise, simulate.p.value = TRUE)
 print(test_fisher)
 ```
 
+Le test de Fisher entre le niveau d'étude et le type d'agriculture ($p = 0,10$) indique que le niveau d'étude influence un peu le type d'agriculture. Cela suggère que si l'instruction joue un rôle dans l'adoption de techniques agricoles spécifiques, elle n'est pas le seul moteur du changement.l'outil pourrait proposer des modules de formation aux agriculteurs.
 
+
+# Analyse factorielle avec les profils
+
+```{r, echo=FALSE}
+# Création de 3 catégories basées sur les quantiles (33%, 66%)
+simulation$superficie1 <- cut(simulation$superficie_total_finale, 
+                         breaks = quantile(simulation$superficie_total_finale, probs = seq(0, 1, 1/3), na.rm = TRUE),
+                         labels = c("Petite", "Moyenne", "Grande"),
+                         include.lowest = TRUE)
+
+simulation$age <- as.factor(simulation$age)
+
+library(FactoMineR)
+library(factoextra)
+
+simulation_analyse <- simulation %>% 
+  select(sexe, age, etude, commune,           # Profil
+         culture1, type_agri, superficie1) # Système de production
+
+# Lancement de l'ACM
+res.mca <- MCA(simulation_analyse, graph = FALSE)
+
+# Visualisation des relations
+fviz_mca_var(res.mca, 
+             repel = TRUE, 
+             choice = "var.cat", # Visualise les catégories
+             shape.var = 15,     # Carrés pour les points
+             col.var = "blue",
+             ggtheme = theme_minimal())
+```
+L'ACM montre une structuration de l'espace de production selon le profil socio-économique.
+Le segment A (Haut-Droite)
+Profil : Jeunes (25-40 ans), niveau secondaire, superficies moyennes.
+
+Le segment B (Bas-Droite)
+Profil : Niveau supérieur, forte présence de femmes, cultures à valeur ajoutée (Ananas, Manioc).
+
+Le segment C (Gauche)
+Profil : Pas d'instruction, grandes surfaces de palmier/tomates ou agriculture pluviale.
+
+# Conclusion partielle
+L'analyse statistique, bien que révélant une certaine homogénéité des pratiques à travers les tests de Fisher, souligne par l'ACM une structuration de l'espace agricole où le capital scolaire commence à orienter les choix techniques. Cette absence de clivages rigides prouve que les systèmes de production ne sont pas dictés par la fatalité du profil social, mais restent ouverts à une transformation par l'outil numérique. Dès lors, la solution proposée doit être universelle dans ses fonctions mais inclusive dans son ergonomie, afin de convertir ces tendances latentes en une adoption généralisée des meilleures pratiques agricoles.
