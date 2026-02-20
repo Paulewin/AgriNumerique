@@ -1,0 +1,88 @@
+---
+title: "Amélioration de la résilience des producteurs agricoles face au changement climatique au Bénin"
+author:  DENAKPO Paule,DEDEGBE Bonifacia,DIMON Elodie,BOURAIMA Oulfath, AZONGNIDE Glwadys
+date: "`r Sys.Date()`"
+bibliography: references.bib
+biblio-style: APA
+citation_package: biblatex
+output: html_document
+ toc: true
+    toc_depth: 3
+    toc_float: true
+    ---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+**Amélioration de la résilience des producteurs agricoles face au changement climatique au Bénin**
+
+# 1.Contexte et justification 
+Au Bénin, le changement climatique transforme profondément l’agriculture à tavers diverses phénomènes comme: l'irrégularité des pluies,  les sécheresses fréquentes et bien d'autres.Ces dernières  perturbent la production et réduisent  considérablement les rendements. Cependant, tous les producteurs ne sont pas affectés de la même manière. Certains démontrent une capacité d’adaptation qui leur permet de limiter les pertes, tandis que d’autres restent fortement vulnérables. Cette variabilité suggère que plusieurs facteurs peuvent  influencer la résilience des exploitations. Identifier et comprendre ces déterminants nous permettra  non seulement de  concevoir des stratégies mais aussi de trouver des solutions fondées sur des données probantes afin d’améliorer durablement la résilience des producteurs agricoles et renforcer la sécurité alimentaire au Bénin, ainsi que les conditions de vie de ces exploittions.
+
+#2.Bref résumé du projet 
+ Ce projet a pour but  de développer une application innovante pour aider les producteurs à anticiper les risques liés aux aléas climatiques et à adopter des pratiques agricoles adaptées. En sécurisant la production, cet outil améliorera la disponibilité et l’accès à la nourriture pour les communautés rurales et renforcera leur capacité à faire face aux changements  climatiques. En combinant technologie et connaissances scientifiques, ce projet vise à renforcer durablement la résilience des producteurs agricoles au Bénin.
+ 
+#3.Objectif du projet
+
+##3.1 Objectif générale
+ L'objectif générale de ce projet est de contribuer à la résilience des producteurs béninois dans un contexte de changement climatique 
+ 
+### 3.1.1Objectifs Spécifiques(OS)
+
+**•0S1 : Caractériser le profil socio-économique et le système de production des agriculteurs enquêtés**
+**•	0S2 : Evaluer la perception des producteurs par rapport aux impacts du changement climatique sur la production agricole et leurs niveaux d’adaptation**
+**•	0S3 : Évaluer le niveau d’accès des producteurs à l’information climatique et les obstacles à l’adoption de solutions numériques et agricoles**.
+**•	0S4 : Hiérarchiser les besoins des producteurs en matière de plateforme numérique**.
+**•	0S5 : Évaluer l’acceptabilité et l’intention d’utilisation de la plateforme**
+
+####3.1.2 Hypothèses 
+*•	H1 : Le profil socio-économique des producteurs (âge, éducation, ressources) détermine directement leur système de production (choix techniques, surfaces, diversification)*
+*•	H2 : Les producteurs perçoivent fortement les impacts du changement climatique sur leur production, mais leur niveau d’adaptabilité varie significativement selon leurs caractéristiques socio-économiques, leur accès aux ressources et leur contexte géographique*
+*•	H3 : Le niveau d'accès des producteurs à l'information climatique et leur adoption de solutions numériques sont fortement déterminés par des facteurs socio-économiques, infrastructurels et cognitifs, et non par la seule disponibilité technique de ces solutions*
+*•	H4 : Les producteurs préfèrent une plateforme basique mais accessible à 100% plutôt qu'une plateforme sophistiquée accessible à 30%.*
+*•	H5 : L'acceptabilité et l'intention d'utilisation sont principalement déterminées par l'utilité perçue concrète et la facilité d'accès technique*
+
+#5.Méthodologie
+
+##5.1.1 Collecte, Traitement et Analyse des Données
+
+**Collecte de données**
+Les données ont été collectées à l’aide d’un questionnaire structuré. Il comprend des questions à la fois fermées et semi-fermées portant sur le profil socio-économique des producteurs, les impacts du changement climatique, l’accès à l’information climatique, les pratiques d’adaptation et les besoins en services numériques agricoles de ces derniers.
+
+**Traitement des données **
+Les données recueillies  sont validées, nettoyées ,structurées et simulées avant d’être analysées afin d’identifier les tendances et les relations significatives. Leur interprétation permet de générer des solutions fiables adapté à leur condition de vie , transformant ainsi l’information brute en outils décisionnels pour réduire les pertes et renforcer la résilience des producteurs.
+
+**Analyse des données **
+Les données traitées ont été codées, saisies et analysées à l’aide du logiciel RStudio. L’analyse comprend des statistiques descriptives (fréquences, pourcentages, moyennes), des tableaux de contingence pour examiner les relations entre variables, ainsi que le test exact de Fisher pour évaluer les associations significatives. Des modèles de régression linéaire et logistique ont également été appliqués afin d’identifier les facteurs explicatifs et de mesurer leur influence sur la variable d’intérêt.
+
+##5.2 Outils et Techniques de Collecte de Données
+
+**Outils de collecte de données**
+Les données ont été collectées grâce à une enquête numérique via Google Forms, permettant de saisir directement les informations sur les pratiques agricoles, les impacts climatiques et le profil socio-économique des producteurs.
+
+**Techniques de Collecte de Données**
+Le lien du Google Forms a été envoyer  directement aux producteurs que nous connaissons,  qsui à leur tour en relayé le Google Forms à leur entourage, via les réseaux sociaux et les groupes d’appartenance. Cette approche ciblée a permis de joindre un large éventail de participants tout en assurant que les informations recueillies reflètent fidèlement les pratiques agricoles et l’expérience des producteurs face aux aléas climatiques.
+
+#6. Résultats
+
+##6.1 Principales Informations Dérivées de l’Analyse des Données
+
+Notre étude s'est basé sur les 04 premiers objectifsspécifiques et leur hypothèses respectives.
+**OS1:Caractériser le profil socio-économique et le système de production des agriculteurs enquêtés** 
+
+**•	0S2 : Evaluer la perception des producteurs par rapport aux impacts du changement climatique sur la production agricole et leurs niveaux d’adaptation**
+Les analyses révèlent l’ampleur des effets du changement climatique sur les exploitations agricoles. Près de 95 % des producteurs ont observé les phénomènes climatiques et leurs impacts au cours des dix dernières années(voir tableauB1). La majorité (92 %) constate une chute notable des rendements (66 %), tandis que maladies, ravageurs (66 %), pertes totales (44 %) et dégradation des sols (42 %) compliquent leur production voir(grapheB2). Avec un indice moyen de perception de 0,61, il est clair que les producteurs ressentent intensément ces changements et leurs conséquences.Dans le prolongement de ces résultats, l’analyse des caractéristiques socio-économiques met clairement en évidence les disparités observées en matière d’adaptation. Les producteurs ayant un niveau d’instruction secondaire ou supérieur présentent des indices moyens d’adaptation plus élevés que ceux du primaire ou sans instruction, ce qui suggère que l’éducation facilite la compréhension et l’application des stratégies d’ajustement. À l’inverse, les producteurs plus âgés ou disposant d’une longue expérience affichent des niveaux d’adaptation relativement faibles, traduisant une possible inertie face à l’innovation ou un accès limité à l’information. Ces constats confirment que l’adaptation n’est pas homogène mais varie selon les caractéristiques socio-économiques(voir grapheB5). Par ailleurs, le test exact de Fisher ne révèle aucune association statistiquement significative entre le type d’agriculture pratiqué et le niveau d’adaptation (p = 1), indiquant que l’adaptabilité apparaît indépendante du système de production. Ainsi, bien que les producteurs perçoivent fortement les impacts du changement climatique, la majorité demeure faiblement adaptée, tandis qu’une minorité, principalement plus instruite, parvient à développer des stratégies efficaces. Ces résultats confirment l’hypothèse 02 selon laquelle la perception des impacts est élevée, mais le niveau d’adaptabilité varie significativement selon les caractéristiques socio-économiques et le contexte géographique.
+
+**•	0S3 : Évaluer le niveau d’accès des producteurs à l’information climatique et les obstacles à l’adoption de solutions numériques et agricoles**.
+Les résultats empiriques montrent que, malgré l’existence d’outils numériques d’information climatique, leur niveau d’adoption demeure limité et inégalement réparti entre les producteurs. L’analyse met en évidence que les contraintes liées à l’accès au réseau et à l’électricité réduisent significativement l’usage effectif des solutions numériques en milieu rural. Par ailleurs, les producteurs présentant un faible niveau d’instruction ou une maîtrise limitée des outils numériques adoptent moins fréquemment ces technologies, ce qui souligne l’importance des facteurs cognitifs dans le processus d’appropriation. De plus, le coût du forfait internet, rapporté aux revenus agricoles, apparaît comme un frein récurrent à l’utilisation régulière de ces services.
+Ces résultats indiquent que la simple disponibilité technique d’une solution numérique ne garantit ni son accès réel ni son adoption durable. L’utilisation effective dépend plutôt d’un ensemble de facteurs infrastructurels, cognitifs et socio-économiques qui conditionnent la capacité des producteurs à intégrer l’innovation dans leurs pratiques. L’hypothèse 3 est ainsi confirmée : l’accès et l’adoption des outils numériques relèvent davantage des conditions structurelles et sociales que de leur seule existence technique.
+
+**0S4 : Hiérarchiser les besoins des producteurs en matière de plateforme numérique**
+s résultats montrent que les producteurs accordent une importance prioritaire à la fiabilité et à la disponibilité continue de l’information climatique, celle-ci étant perçue comme un outil direct de gestion du risque agricole. Les difficultés d’accès ponctuelles, les lenteurs d’affichage ou les dysfonctionnements techniques entraînent une perte de confiance et réduisent l’usage des plateformes jugées instables. Par ailleurs, les producteurs utilisent plus facilement des canaux simples tels que les SMS ou les services USSD, compatibles avec des téléphones basiques et des réseaux faibles.
+Cependant, les données révèlent également que la seule accessibilité technique ne suffit pas à garantir l’efficacité du dispositif. Les producteurs expriment un besoin d’information claire, compréhensible, adaptée aux langues locales et, lorsque possible, appuyée par un relais humain de proximité. Ces éléments indiquent que la préférence ne porte pas exclusivement sur le caractère « basique » de la solution, mais sur sa capacité à combiner accessibilité, compréhension et interaction.
+Ainsi, l’hypothèse selon laquelle les producteurs privilégient systématiquement uneplateforme basique accessible à 100 % est rejetée. Les résultats suggèrent plutôt qu’une approche hybride, intégrant accessibilité technique et qualité fonctionnelle, constitue le modèle le plus pertinent pour répondre durablement aux besoins des agriculteurs.
+
+#6.2 Format de Présentation des Résultats
+
+
