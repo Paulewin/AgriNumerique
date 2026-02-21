@@ -361,8 +361,8 @@ Simulation_AgriN[Simulation_AgriN$phenomene_clima_obs == "Non", cols_a_vider] <-
 changement climatique sur la production agricole et leurs niveaux
 d’adaptation
 
-Cet objectif prend en compte la deuxième et le troisième hupothèse sur
-lesquelles nous allons nous basé pour faire nos annalyses.
+Cet objectif prend en compte la deuxième hypothèse sur
+laquelles nous allons nous basé pour faire nos annalyses.
 
 ---
 title: "Multiple Columns"
@@ -560,11 +560,45 @@ sols sont également obsevée per les producteurs respectivements
 perception des impacts climatiques est globalement élevée au sein de
 l'échantillon .
 
-Nous pouvons dire de part les résultats de cette annalyse que la
-majorité des producteures percoivent fortement les impacts du changement
-climatique sur leur activité agricole. Cette perception élevé constitue
-donc un facteur favorable à l'adoption des stratégies d'adaptation,bien
-que des contraintes socio- économique économique et institutionnel.
+De toutes les annalyses faite il en ressort 04 points cruciaux : - la
+prédominance des producteurs (95%) ont percu les phénomènes climatiques
+et leurs effets durant ces 10 dernières annéees. - la majorité des
+producteur(92%)percoivent une baisse de rendement significative de (66%)
+liée aux changements climatiques.
+
+-les maladies ou ravageurs, les pertes totales et la dégradation des
+sols sont également obsevée per les producteurs respectivements
+(66%;44%;42%).
+
+-l'indice de perception climatique moyenne (0,61)indique que la
+perception des impacts climatiques est globalement élevée au sein de
+l'échantillon .
+De toutes les annalyses faite il en ressort 04 points cruciaux : - la
+prédominance des producteurs (95%) ont percu les phénomènes climatiques
+et leurs effets durant ces 10 dernières annéees. - la majorité des
+producteur(92%)percoivent une baisse de rendement significative de (66%)
+liée aux changements climatiques.
+
+-les maladies ou ravageurs, les pertes totales et la dégradation des
+sols sont également obsevée per les producteurs respectivements
+(66%;44%;42%).
+
+-l'indice de perception climatique moyenne (0,61)indique que la
+perception des impacts climatiques est globalement élevée au sein de
+l'échantillon .
+De toutes les annalyses faite il en ressort 04 points cruciaux : - la
+prédominance des producteurs (95%) ont percu les phénomènes climatiques
+et leurs effets durant ces 10 dernières annéees. - la majorité des
+producteur(92%)percoivent une baisse de rendement significative de (66%)
+liée aux changements climatiques.
+
+-les maladies ou ravageurs, les pertes totales et la dégradation des
+sols sont également obsevée per les producteurs respectivements
+(66%;44%;42%).
+
+-l'indice de perception climatique moyenne (0,61)indique que la
+perception des impacts climatiques est globalement élevée au sein de
+l'échantillon .
 
 2.  Mesure du niveau d’adaptation
 
@@ -738,7 +772,7 @@ head(adaptation_binaire)
 
 ```{r}
 library(dplyr)
-Pour le  sexe
+'Pour le  sexe'
 adaptation_binaire %>%
   group_by(sexe, niveau_adaptation) %>%
   summarise(n = n()) %>%

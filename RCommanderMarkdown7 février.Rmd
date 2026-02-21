@@ -1,0 +1,212 @@
+<!-- R Commander Markdown Template -->
+
+Replace with Main Title
+=======================
+
+### Ce PC
+
+### `r as.character(Sys.Date())`
+
+```{r echo=FALSE}
+# include this code chunk as-is to set options
+knitr::opts_chunk$set(comment=NA, prompt=TRUE, out.width=750, fig.height=8, fig.width=8)
+library(Rcmdr)
+library(car)
+library(RcmdrMisc)
+```
+
+```{r}
+Data <- readXL("C:/Users/Ce PC/Downloads/SDA.xlsx", rownames=FALSE, header=TRUE, na="", sheet="Feuil1", 
+  stringsAsFactors=TRUE)
+```
+
+
+### Independent-Samples t-Test: expérience_agricole~sexe
+```{r}
+t.test(expérience_agricole~sexe, alternative='two.sided', conf.level=.95, var.equal=FALSE, data=Data)
+```
+
+
+### Histogram: expérience_agricole
+```{r}
+with(Data, Hist(expérience_agricole, groups=Age, scale="frequency", breaks="Sturges", col="darkgray"))
+```
+
+
+### Histogram: expérience_agricole
+```{r}
+with(Data, Hist(expérience_agricole, groups=sexe, scale="frequency", breaks="Sturges", col="darkgray"))
+```
+
+
+### Histogram: expérience_agricole
+```{r}
+with(Data, Hist(expérience_agricole, groups=Niveau.d..étude.., scale="percent", breaks="Sturges", col="darkgray"))
+```
+
+
+### Histogram: expérience_agricole
+```{r}
+with(Data, Hist(expérience_agricole, groups=Age, scale="percent", breaks="Sturges", col="darkgray"))
+```
+
+
+### Histogram: expérience_agricole
+```{r}
+with(Data, Hist(expérience_agricole, groups=sexe, scale="percent", breaks="Sturges", col="darkgray"))
+```
+
+```{r}
+library(abind, pos=19)
+```
+
+
+
+### Two-Way Contingency Table: sexe, Niveau.d..étude..
+```{r}
+local({
+  .Table <- xtabs(~sexe+Niveau.d..étude.., data=Data)
+  cat("\nFrequency table:\n")
+  print(.Table)
+  .Test <- chisq.test(.Table, correct=FALSE)
+  print(.Test)
+})
+```
+
+
+### Frequencies: sexe
+```{r}
+local({
+  .Table <- with(Data, table(sexe))
+  cat("\ncounts:\n")
+  print(.Table)
+  cat("\npercentages:\n")
+  print(round(100*.Table/sum(.Table), 2))
+  .Probs <- c(0.5,0.5) 
+  chisq.test(.Table, p=.Probs)
+})
+```
+
+```{r}
+library(e1071, pos=20)
+```
+
+
+
+### Summarize Data Set: Data
+```{r}
+summary(Data)
+```
+
+
+
+### Frequencies: Age
+```{r}
+local({
+  .Table <- with(Data, table(Age))
+  cat("\ncounts:\n")
+  print(.Table)
+  cat("\npercentages:\n")
+  print(round(100*.Table/sum(.Table), 2))
+  .Probs <- c(0.333333333333333,0.333333333333333,0.333333333333333) 
+  chisq.test(.Table, p=.Probs)
+})
+```
+
+```{r}
+Datas <- readXL("C:/Users/Ce PC/Downloads/SDA.xlsx", rownames=FALSE, header=TRUE, na="", sheet="Feuil1", 
+  stringsAsFactors=TRUE)
+```
+
+
+### Frequencies: Age
+```{r}
+local({
+  .Table <- with(Datas, table(Age))
+  cat("\ncounts:\n")
+  print(.Table)
+  cat("\npercentages:\n")
+  print(round(100*.Table/sum(.Table), 2))
+  .Probs <- c(0.5,0.5) 
+  chisq.test(.Table, p=.Probs)
+})
+```
+
+
+### Frequencies: Niveau.d..étude..
+```{r}
+local({
+  .Table <- with(Datas, table(Niveau.d..étude..))
+  cat("\ncounts:\n")
+  print(.Table)
+  cat("\npercentages:\n")
+  print(round(100*.Table/sum(.Table), 2))
+  .Probs <- c(0.25,0.25,0.25,0.25) 
+  chisq.test(.Table, p=.Probs)
+})
+```
+
+
+### Frequencies: Nom._.commune
+
+
+### Frequencies: Type_agriculturep
+```{r}
+local({
+  .Table <- with(Datas, table(Type_agriculturep))
+  cat("\ncounts:\n")
+  print(.Table)
+  cat("\npercentages:\n")
+  print(round(100*.Table/sum(.Table), 2))
+  .Probs <- c(0.5,0.5) 
+  chisq.test(.Table, p=.Probs)
+})
+```
+
+
+### Frequencies: Nom_viliage
+
+```{r}
+Datase <- readXL("C:/Users/Ce PC/Downloads/SDA.xlsx", rownames=FALSE, header=TRUE, na="", sheet="Feuil1", 
+  stringsAsFactors=TRUE)
+```
+
+
+### Frequencies: Nom._.commune
+```{r}
+local({
+  .Table <- with(Datase, table(Nom._.commune))
+  cat("\ncounts:\n")
+  print(.Table)
+  cat("\npercentages:\n")
+  print(round(100*.Table/sum(.Table), 2))
+})
+```
+
+
+### Frequencies: Nom._.commune
+```{r}
+local({
+  .Table <- with(Datase, table(Nom._.commune))
+  cat("\ncounts:\n")
+  print(.Table)
+  cat("\npercentages:\n")
+  print(round(100*.Table/sum(.Table), 2))
+  .Probs <- c(0.142857142857143,0.142857142857143,0.142857142857143,0.142857142857143,0.142857142857143,
+  0.142857142857143,0.142857142857143) 
+  chisq.test(.Table, p=.Probs)
+})
+```
+
+
+### Independent-Samples t-Test: expérience_agricole~sexe
+```{r}
+t.test(expérience_agricole~sexe, alternative='two.sided', conf.level=.95, var.equal=FALSE, data=Datase)
+```
+
+
+### Independent-Samples t-Test: expérience_agricole~Age
+```{r}
+t.test(expérience_agricole~Age, alternative='two.sided', conf.level=.95, var.equal=FALSE, data=Datase)
+```
+
