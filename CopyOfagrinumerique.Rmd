@@ -1,0 +1,940 @@
+---
+title: "agriNumeriqueOriginal"
+output: word_document
+date: "`r Sys.Date()`"
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Affichons d'abord les noms des colonnes
+
+```{r}
+colnames(Agri_Numérique)
+```
+
+# Supprimer la première colonne
+
+```{r}
+AgriN <- Agri_Numérique[, -1]
+```
+
+# Modifions les colonnes
+
+```{r}
+colnames(AgriN)[1] <- "sexe"                                                                                                                                        
+colnames(AgriN)[2] <- "age"                                                                                                                                         
+colnames(AgriN)[3] <- "etude"                                                                                                                            
+colnames(AgriN)[4] <- "vilage"                                                                                                         
+colnames(AgriN)[5]<- "commune"                                                                                                                           
+colnames(AgriN)[6] <- "type_agri"                                                                                                               
+colnames(AgriN)[7] <- "culture1"                                                                                                                   
+colnames(AgriN)[8] <- "culture2"                                                                                                                  
+colnames(AgriN)[9] <- "culture3"                                                                                                                  
+colnames(AgriN)[10] <- "superficie_maïs"                                                                                                  
+colnames(AgriN)[11] <- "unite_superficie_maïs"                                                                        
+colnames(AgriN)[12] <- "superficie_total"                                                                           
+colnames(AgriN)[13] <- "unite_superficie_total"                                  
+colnames(AgriN)[14] <- "expérience"                                                                                                             
+colnames(AgriN)[15] <- "phenomene_clima_obs"                         
+colnames(AgriN)[16] <- "liste_phenomene_clima_obs"                                                                                                                           
+colnames(AgriN)[17] <- "effets_phenomene_clima_obs"                                                                      
+colnames(AgriN)[18] <- "moyen_gestion_risques"                                                                  
+colnames(AgriN)[19] <- "moyen1"                                                                                                                   
+colnames(AgriN)[20] <- "Moyen2"                                                                                                                   
+colnames(AgriN)[21] <- "Moyen3"                                                                                                                    
+colnames(AgriN)[22] <- "possession_telephone"                                                                                                        
+colnames(AgriN)[23] <- "acces_internet"                                                                                               
+colnames(AgriN)[24] <- "Utilisation_outils_numeriques"                                                                      
+colnames(AgriN)[25] <- "precisez_lesquels"                                                                                                                 
+colnames(AgriN)[26] <- "frequence_appli_mobiles"                                                                                   
+colnames(AgriN)[27] <- "frequence_plateformes_web?"                                                                                        
+colnames(AgriN)[28] <- "frequence_SMS_alerte pretoce?"                                                                                     
+colnames(AgriN)[29] <- "frequence_reseaux_sociaux agricoles"                                                                              
+colnames(AgriN)[30] <- "frequence_autres_outils"                                                                                          
+colnames(AgriN)[31] <- "obstacles_au_numerique"                                                                     
+colnames(AgriN)[32] <- "informations_souhaitee_recevoir"                                                       
+colnames(AgriN)[33] <- "forme_reception_préfere"                                                                                  
+colnames(AgriN)[34] <- "langues_adaptes"                                                                       
+colnames(AgriN)[35] <- "Langue_locale_majoritaire"                                                                                                        
+colnames(AgriN)[36] <- "fonctionalite_application"                                                                                                
+colnames(AgriN)[37] <- "caracteristique_principale_application"                                              
+colnames(AgriN)[38] <- "gestionnaire"                                                                                  
+colnames(AgriN)[39] <- "appli_numerique_gere_aleas_climatiques"                                            
+colnames(AgriN)[40] <- "conditions_utilisation"                                                                                  
+colnames(AgriN)[41] <- "contribution_symbolique"                       
+colnames(AgriN)[42] <- "suggestions"
+
+# voir la table modifiée
+View(AgriN)
+
+# Modifier l'écriture de Palmier à huile en palmiers à la ligne 9, colonne culture1
+AgriN[9, "culture1"] <- "Palmier à huile"
+AgriN[10, "culture1"] <- "Palmier à huile"
+AgriN[11, "culture1"] <- "Palmier à huile"
+
+# Modifier l'écriture de Dogbo lignes 5,6,7, colonne commune
+AgriN[5, "commune"] <- "Dogbo"
+AgriN[6, "commune"] <- "Dogbo"
+AgriN[7, "commune"] <- "Dogbo"
+
+# Modifier l'écriture des lignes 5,6,7, colonne culture2
+AgriN[5, "culture2"] <- "Manioc"
+AgriN[6, "culture2"] <- "Arachide"
+AgriN[7, "culture2"] <- "Soja"
+
+
+AgriN[5, "culture3"] <- "Niebé"
+AgriN[6, "culture3"] <- "Niebé"
+
+AgriN[8, "unite_superficie_maïs"] <- "Hectare"
+AgriN[14, "unite_superficie_maïs"] <- "KANTI"
+
+
+AgriN[1, "unite_superficie_total"] <- "Hectare"
+AgriN[2, "unite_superficie_total"] <- "Hectare"
+AgriN[8, "unite_superficie_total"] <- "Hectare"
+
+```
+
+# Modifier l'écriture du palmier à huile
+
+```{r}
+AgriN[9, "culture1"] <- "Palmier à huile"
+AgriN[10, "culture1"] <- "Palmier à huile"
+AgriN[11, "culture1"] <- "Palmier à huile"
+
+```
+
+# Modifier l'écriture de dogbo
+
+```{r}
+AgriN[5, "commune"] <- "Dogbo"
+AgriN[6, "commune"] <- "Dogbo"
+AgriN[7, "commune"] <- "Dogbo"
+
+```
+
+\# Modifier l'écriture des lignes 5,6,7, colonne culture2
+
+```{r}
+AgriN[5, "culture2"] <- "Manioc"
+AgriN[6, "culture2"] <- "Arachide"
+AgriN[7, "culture2"] <- "Soja"
+AgriN[5, "culture3"] <- "Niebé"
+AgriN[6, "culture3"] <- "Niebé"
+
+AgriN[8, "unite_superficie_maïs"] <- "Hectare"
+AgriN[14, "unite_superficie_maïs"] <- "KANTI"
+
+AgriN[1, "unite_superficie_total"] <- "Hectare"
+AgriN[2, "unite_superficie_total"] <- "Hectare"
+AgriN[8, "unite_superficie_total"] <- "Hectare"
+
+
+```
+
+\# Création d'une base de donnée propre
+
+```{r}
+write.csv(AgriN, "AgriN_propre.csv", row.names = FALSE)
+AgriN_propre <- read_csv("AgriN_propre.csv")
+View(AgriN_propre)
+
+```
+
+\# Analyse exploratoire des données pour voir la diversité des réponses,
+les manquants et les données abbérantes. \# actions: si réponses non
+diversifiées(uniqement oui) garder pour analyser et simuler que des oui
+\# Si manquantes en grannde quantité ne pas simuler ni analyser \# si
+données abbérantes, garder pour analyse. Simuler à PARTIR DE LA MEDIANE
+ou ne pas utiliser
+
+# transformer les colones en caractères sous forme numérique
+
+```{r}
+AgriN_propre$superficie_maïs <- as.numeric(AgriN_propre$superficie_maïs)
+AgriN_propre$superficie_total <- as.numeric(AgriN_propre$superficie_total)
+
+```
+
+\# Modifier les valeurs
+
+```{r}
+AgriN_propre[2, "unite_superficie_maïs"] <- "Hectare"
+
+```
+
+# Création de la colonne convertie de superficie de maîs
+
+```{r}
+AgriN_propre$superficie_total_finale <- AgriN_propre$superficie_maïs
+
+```
+
+# Conversion des données dans la colonne.
+
+```{r}
+ # Si l'unité est "KANTI", on multiplie par 400 (pour avoir des m2) puis on divise par 10 000 (pour avoir des ha)
+# Ce qui revient à multiplier par 0.04
+AgriN_propre$superficie_maîs_finale[AgriN_propre$unite_superficie_maïs == "KANTI"] <- 
+  AgriN_propre$superficie_maïs[AgriN_propre$unite_superficie_maïs == "KANTI"] * 0.04
+colnames(AgriN_propre)[43] <- "superficie_maïs_finale"
+
+
+
+```
+
+Création de la colonne convertie de superficie totale
+
+```{r}
+AgriN_propre$superficie_total_finale <- AgriN_propre$superficie_total
+
+```
+
+\# Conversion des données dans la colonne.
+
+```{r}
+AgriN_propre$superficie_total_finale[AgriN_propre$unite_superficie_total == "KANTI"] <- 
+  AgriN_propre$superficie_total[AgriN_propre$unite_superficie_total == "KANTI"] * 0.04
+
+```
+
+# histogrammes des colonnes numériques pour vérifier la loi normale de distribution
+
+```{r}
+hist(AgriN_propre$superficie_total_finale)
+hist(AgriN_propre$superficie_maïs_finale)
+
+```
+
+summary(AgriN_propre)
+
+```{r}
+var(AgriN_propre$superficie_maïs_finale, na.rm = TRUE); sd(AgriN_propre$superficie_maïs_finale, na.rm = TRUE)  
+var(AgriN_propre$superficie_total_finale, na.rm = TRUE); sd(AgriN_propre$superficie_total_finale, na.rm = TRUE) 
+
+```
+
+# correlation entre les variables numériques
+
+```{r}
+cor(AgriN_propre$superficie_total_finale, 
+    AgriN_propre$superficie_maïs_finale, 
+    use = "complete.obs")
+plot(AgriN_propre$superficie_total_finale, 
+     AgriN_propre$superficie_maïs_finale,
+     main = "Lien entre Surface Totale et Surface Maïs",
+     xlab = "Surface Totale (ha)",
+     ylab = "Surface Maïs (ha)",
+     pch = 19, col = "blue")
+abline(lm(superficie_maïs_finale ~ superficie_total_finale, data = AgriN_propre), col = "red")
+
+```
+
+# simulation des variables numériques elles sont corelées à 0.98.
+
+library(MASS) \## définition des paramètres
+
+```{r}
+n_sim <- 100
+moyennes <- c(superficie_totale = 5.026, superficie_maïs = 2.381)
+ecarts_types <- c(superficie_totale = 7.935, superficie_maïs = 2.48)
+correlation <- 0.98
+
+```
+
+## création de la matrice de corrélation
+
+```{r}
+cor_matrix <- matrix(c(1,           correlation, 
+                       correlation, 1), 
+                     nrow = 2, ncol = 2)
+
+```
+
+## transformation de la corrélation en matrice de COVARIANCE (indispensable pour R)
+
+## La formule est : Cov(X,Y) = Cor(X,Y) \* SD(X) \* SD(Y)
+
+```{r}
+M_cov <- cor_matrix * outer(ecarts_types, ecarts_types)
+
+```
+
+## génèration des 100 données
+
+```{r}
+set.seed(123)
+sim_data <- mvrnorm(n = n_sim, mu = moyennes, Sigma = M_cov)
+
+```
+
+## transformation en tableau et on gère les surfaces négatives
+
+```{r}
+df_simule <- as.data.frame(sim_data)
+names(df_simule) <- c("superficie_total_finale", "superficie_mais_finale")
+
+```
+
+## rnorm peut créer des nombres négatifs, on les force à 0
+
+```{r}
+df_simule$superficie_total_finale <- pmax(0, df_simule$superficie_total_finale)
+df_simule$superficie_mais_finale <- pmax(0, df_simule$superficie_mais_finale)
+
+
+```
+
+## pas de maïs \> total
+
+```{r}
+df_simule$superficie_mais_finale <- pmin(df_simule$superficie_mais_finale, df_simule$superficie_total_finale)
+
+```
+
+##Vérifications
+
+```{r}
+print(cor(df_simule$superficie_total_finale, df_simule$superficie_mais_finale))
+print(mean(df_simule$superficie_mais_finale))
+
+```
+
+# GÉNÉRATION DES VARIABLES CATÉGORIELLES (Méthode Bootstrap)
+
+## identification des colonnes qui ne sont pas numériques
+
+```{r}
+set.seed(123)
+n_cible <- 100
+cols_cat <- names(AgriN_propre)[sapply(AgriN_propre, function(x) is.character(x) | is.factor(x))]
+
+```
+
+```{r}
+for (nom in cols_cat) {
+  # On pioche 100 fois dans les valeurs existantes de chaque catégorie
+  donnees_propres <- AgriN_propre[[nom]][!is.na(AgriN_propre[[nom]])]
+  df_simule[[nom]] <- sample(donnees_propres, size = n_cible, replace = TRUE)
+}
+```
+
+# Créer un fichier csv
+
+```{r}
+write.csv(df_simule, "Simulation_AgriN.csv", row.names = FALSE)
+simulation <- read.csv("Simulation_AgriN.csv")
+View(simulation)
+
+```
+
+# VÉRIFICATION DU RÉSULTAT
+
+```{r}
+print(dim(simulation)) 
+head(simulation)
+
+```
+
+```{r}
+cols_a_vider <- c("moyen1", "Moyen2", "Moyen3")
+
+Simulation_AgriN[Simulation_AgriN$moyen_gestion_risques == "Non", cols_a_vider] <- NA
+
+
+```
+
+```{r}
+cols_a_vider <- c("liste_phenomene_clima_obs ", "effets_phenomene_clima_obs")
+
+Simulation_AgriN[Simulation_AgriN$phenomene_clima_obs == "Non", cols_a_vider] <- NA
+
+```
+
+• 0S2 : Evaluer la perception des producteurs par rapport aux impacts du
+changement climatique sur la production agricole et leurs niveaux
+d’adaptation
+
+Cet objectif prend en compte la deuxième et le troisième hupothèse sur
+lesquelles nous allons nous basé pour faire nos annalyses.
+
+---
+title: "Multiple Columns"
+output: flexdashboard::flex_dashboard
+---
+Hypotheses02 : Les producteurs perçoivent fortement les impacts du changement climatique sur leur production, mais leur niveau d’adaptabilité varie significativement selon leurs caractéristiques socio-économiques et leur contexte géographique.
+1.  Analyse de la perception des impacts climatiques
+
+La perception des producteurs face aux changements climatiques a été
+analysée à l’aide de statistiques descriptives. Les producteurs ont été
+interrogés sur plusieurs manifestations du changement climatique,
+notamment la baisse des rendements, les pertes totales, la dégradation
+des sols et l’apparition de nouvelles maladies ou ravageurs.Les
+fréquences et pourcentages ont permis de déterminer la proportion de
+producteurs ayant observé ces changements.Un indice de perception
+climatique a ensuite été construit en regroupant les différentes
+réponses afin d’obtenir une mesure globale du niveau de perception.
+
+```{r}
+# Nom de la colonne
+colonne <- "phenomene_clima_obs"
+
+# Calcul effectif et pourcentage pour la colonne 'phenomene_clima_obs' de Simulation_AgriN
+
+# Supprimer les NA pour plus de sécurité
+data_clean <- Simulation_AgriN[!is.na(Simulation_AgriN$phenomene_clima_obs), ]
+
+# Calcul de l'effectif
+effectif <- table(data_clean$phenomene_clima_obs)
+
+# Calcul du pourcentage
+pourcentage <- prop.table(effectif) * 100
+
+# Création du tableau final clair
+resultat <- data.frame(
+  Phenomene = names(effectif),
+  Effectif = as.vector(effectif),
+  Pourcentage = round(as.vector(pourcentage), 2)
+)
+
+# Afficher le résultat
+print(resultat)
+
+
+# Afficher le résultat
+head(resultat)
+
+
+```
+
+```{r}
+# Chargement de  la librairie dplyr 
+library(dplyr)
+
+# Créons un nouveau tableau avec uniquement la colonne effets climatique observés
+effet_climatique <-Simulation_AgriN %>%
+  select( effets_phenomene_clima_obs)
+
+# Vérifier
+head(effet_climatique)
+
+
+
+```
+
+```{r}
+# Travaillons avec la base de donnée effet climatique 
+library(dplyr)
+library(tidyr)
+library(stringr)
+
+#  Ajoutons un ID unique à chaque observation
+effet1_df <- effet_climatique %>%
+  mutate(ID = row_number())
+
+#  Séparer les modalités et nettoyer
+effet2_df <- effet1_df %>%
+  mutate(effets_phenomene_clima_obs = str_split(effets_phenomene_clima_obs, ",")) %>%
+  unnest(effets_phenomene_clima_obs) %>%
+  mutate(Effet = str_trim(effets_phenomene_clima_obs)) %>%
+  filter(Effet != "") %>%       
+  # Supprimer les effets vides
+  select(-effets_phenomene_clima_obs)
+
+#  Construire le tableau binaire
+tableau_binaire <- effet2_df %>%
+  mutate(value = 1) %>%
+  pivot_wider(
+    names_from = Effet,
+    values_from = value,
+    values_fill = 0
+  ) %>%
+  arrange(ID)
+
+#  Vérifications
+nrow(tableau_binaire)  
+# doit être 100
+head(tableau_binaire)
+tail(tableau_binaire)
+
+```
+
+```{r}
+tableau_binaire <- effet2_df %>%
+  mutate(value = 1) %>%
+  pivot_wider(
+    id_cols = ID,         
+    names_from = Effet,
+    values_from = value,
+    values_fill = 0
+  ) %>%
+  arrange(ID)
+
+
+```
+
+Déterminons la fréquence et le pourcentage
+
+```{r}
+library(dplyr)
+library(tidyr)
+
+# Supposons que mon tableau binaire s'appelle tableau_binaire
+# et que la première colonne est ID
+
+frequences <- tableau_binaire %>%
+  select(-ID) %>%  # on retire la colonne ID pour ne garder que les effets
+  summarise(across(everything(), sum)) %>%  # somme par effet = nb de producteurs concernés
+  pivot_longer(
+    everything(),
+    names_to = "Effet",
+    values_to = "Nb_producteurs"
+  ) %>%
+  mutate(
+    Pourcentage = (Nb_producteurs / nrow(tableau_binaire)) * 100  # pourcentage
+  ) %>%
+  arrange(desc(Nb_producteurs))  # optionnel : trier par effet le plus fréquent
+
+
+```
+
+construisons le diagramme de barre de la fréquence
+
+```{r}
+library(ggplot2)
+
+# Diagramme avec fréquence absolue
+ggplot(frequences, aes(x = Effet, y = Nb_producteurs)) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  labs(title = "Nombre de producteurs par effet climatique",
+       x = "Effet",
+       y = "Nombre de producteurs") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+    
+```
+
+construisons pour le pourcentage
+
+```{r}
+ggplot(frequences, aes(x = Effet, y = Pourcentage)) +
+  geom_bar(stat = "identity", fill = "darkgreen") +
+  labs(title = "Pourcentage de producteurs par effet climatique",
+       x = "Effet",
+       y = "Pourcentage (%)") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+```
+
+Déterminons l'indice de perception moyenne
+
+```{r}
+ 
+# Indice global = moyenne des proportions
+indice_global <- mean(frequences$Proportion)
+indice_global_pct <- indice_global 
+indice_global_pct
+
+
+```
+
+De toutes les annalyses faite il en ressort 04 points cruciaux : - la
+prédominance des producteurs (95%) ont percu les phénomènes climatiques
+et leurs effets durant ces 10 dernières annéees. - la majorité des
+producteur(92%)percoivent une baisse de rendement significative de (66%)
+liée aux changements climatiques.
+
+-les maladies ou ravageurs, les pertes totales et la dégradation des
+sols sont également obsevée per les producteurs respectivements
+(66%;44%;42%).
+
+-l'indice de perception climatique moyenne (0,61)indique que la
+perception des impacts climatiques est globalement élevée au sein de
+l'échantillon .
+
+Nous pouvons dire de part les résultats de cette annalyse que la
+majorité des producteures percoivent fortement les impacts du changement
+climatique sur leur activité agricole. Cette perception élevé constitue
+donc un facteur favorable à l'adoption des stratégies d'adaptation,bien
+que des contraintes socio- économique économique et institutionnel.
+
+2.  Mesure du niveau d’adaptation
+
+Le niveau d’adaptation des producteurs a été évalué à partir de diverses
+stratégies mises en œuvre pour faire face aux changements climatiques,
+restitué en 03 moyens .
+
+Chaque stratégie a été codée (1 = adoptée ; 0 = non adoptée) et
+additionnée afin d’obtenir un indice d’adaptation pour chaque
+producteur.
+
+Dans un premier temps nous allons extraire la colonne
+moyen_gestion_risque et lui affecter un ID.
+
+```{r}
+moyen_gestion_risques  <- Simulation_AgriN$moyen_gestion_risques
+
+head(moyen_gestion_risques)
+```
+
+```{r}
+# Supposons que ma variable extraite s'appelle moyen_gestion_risques
+# On crée un data frame avec ID de 1 à 100
+moyen_gestion_risques_df <- data.frame(
+  ID = 1:100,
+  moyen_gestion_risques = moyen_gestion_risques[1:100]
+)
+
+# Vérifier le résultat
+head(moyen_gestion_risques_df)
+
+
+```
+
+Déterminons maintenant le pourcentage et l'effectif
+
+```{r}
+# Table des effectifs
+effectifs <- table(moyen_gestion_risques_df$moyen_gestion_risques)
+
+# Pourcentages
+pourcentages <- prop.table(effectifs) * 100
+
+# Créer un data frame clair
+resultat <- data.frame(
+  Modalite = names(effectifs),
+  Effectif = as.numeric(effectifs),
+  Pourcentage = round(as.numeric(pourcentages), 2)
+)
+
+# Afficher le résultat
+resultat
+
+
+```
+
+Possédons à l'extraction des 03moyens et affectons leurs l'ID
+
+```{r}
+gestion_risques_df  <- Simulation_AgriN[, c("moyen1", "Moyen2", "Moyen3")]
+
+head(gestion_risques_df)
+```
+
+```{r}
+gestion_risques_df01 <- data.frame(
+  ID = 1:nrow(gestion_risques_df),
+  gestion_risques_df
+)
+head(gestion_risques_df01)
+
+
+```
+
+Créons le tableau binaire et déterminons l'indice d'adaptation
+
+```{r}
+toutes_strategies <- c(
+  gestion_risques_df01$moyen1,
+  gestion_risques_df01$Moyen2,
+  gestion_risques_df01$Moyen3
+)
+
+# nettoyage
+toutes_strategies <- trimws(as.character(toutes_strategies))
+
+# enlever NA
+toutes_strategies <- toutes_strategies[!is.na(toutes_strategies)]
+
+# liste unique
+liste_strategies <- unique(toutes_strategies)
+
+liste_strategies
+
+```
+
+```{r}
+# Créons la copie de la table
+adaptation_binaire <- gestion_risques_df01
+
+# Boucle sur chaque stratégie
+for (strat in liste_strategies) {
+  adaptation_binaire[[strat]] <- ifelse(
+    adaptation_binaire$moyen1 == strat |
+    adaptation_binaire$Moyen2 == strat |
+    adaptation_binaire$Moyen3 == strat,
+    1, 0
+  )
+}
+head(adaptation_binaire)
+```
+
+determination de l'indice d'adaptation pour les stratégie
+
+```{r}
+adaptation_binaire$indice_adaptation <- rowSums(
+  adaptation_binaire[, liste_strategies],
+  na.rm = TRUE
+)
+
+```
+
+déterminons la moyenne de l'indice d'adaptation
+
+```{r}
+# Moyenne de l'indice d'adaptation
+mean(adaptation_binaire$indice_adaptation, na.rm = TRUE)
+
+```
+
+Déterminons le niveau d'adaptabilité des producteurs
+
+```{r}
+adaptation_binaire$niveau_adaptation <- cut(
+  adaptation_binaire$indice_adaptation,
+  breaks = c(-1, 1, 2, Inf),
+  labels = c("Faible", "Moyen", "Élevé")
+)
+
+```
+
+```{r}
+summary(adaptation_binaire$indice_adaptation)
+table(adaptation_binaire$niveau_adaptation)
+
+```
+
+```{r}
+barplot(table(adaptation_binaire$niveau_adaptation),
+        col = c("Dark blue","gold","light blue"),
+        main = "Niveaux d'adaptation des producteurs",
+        ylab = "Nombre de producteurs")
+
+```
+Il ressort de ces annalyses que 91 % des producteurs sont faiblement adaptés, 0% moyennement adaptés, 09 % fortement adaptés. Toutefois, cette minorité qui a su s'adapter utilise entre autre les semences échelonnées, les variétés résistantes au stress,l'internet et les séances organisées par le services de changement climatique pour gérer un temps soit peu les nombreuses envergures du changement climatique sur leurs productions.
+
+Relation entre l'adaptation des producteurs et les Caractéristiques socio-économiques
+
+Dans le but d’identifier l’influence des caractéristiques socio-économiques sur le niveau d’adaptation, des analyses comparatives ont été menées entre groupes de producteurs. Les moyennes de l’indice d’adaptation ont été comparées selon le sexe, le niveau d’instruction, l’âge et la taille de l’exploitation.
+
+ Ensuite,nous estimerons une régression linéaire multiple afin d’évaluer l’effet simultané de ces variables sur le niveau d’adaptation et d’identifier les facteurs les plus déterminants.
+ 
+ Comparaison selon les caractéristiques socio-économiques
+
+Vérifions  si l’adaptation varie selon l'âge,  le sexe,l'étude,l'expérience.
+
+```{r}
+adaptation_binaire$sexe <- data_clean$sexe
+head(adaptation_binaire)
+```
+
+```{r}
+library(dplyr)
+Pour le  sexe
+adaptation_binaire %>%
+  group_by(sexe, niveau_adaptation) %>%
+  summarise(n = n()) %>%
+  mutate(pourcentage = n / sum(n) * 100)
+
+```
+
+```{r}
+adaptation_binaire$age <- data_clean$age
+head(adaptation_binaire)
+library(dplyr)
+
+adaptation_binaire %>%
+  group_by(age, niveau_adaptation) %>%
+  summarise(n = n()) %>%
+  mutate(pourcentage = n / sum(n) * 100)
+
+```
+
+```{r}
+adaptation_binaire$etude <- data_clean$etude
+head(adaptation_binaire)
+library(dplyr)
+
+adaptation_binaire %>%
+  group_by(etude, niveau_adaptation) %>%
+  summarise(n = n()) %>%
+  mutate(pourcentage = n / sum(n) * 100)
+
+```
+
+```{r}
+adaptation_binaire$expérience <- data_clean$expérience
+head(adaptation_binaire)
+library(dplyr)
+
+adaptation_binaire %>%
+  group_by(expérience, niveau_adaptation) %>%
+  summarise(n = n()) %>%
+  mutate(pourcentage = n / sum(n) * 100)
+
+```
+
+
+
+visualison le niveau d'adaptation et les caractéristiques socio démographique 
+```{r}
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+
+```
+
+```{r}
+data_long <- adaptation_binaire %>%
+  pivot_longer(
+    cols = c(sexe, age,etude, expérience),
+    names_to = "variable",
+    values_to = "categorie"
+  )
+
+```
+
+```{r}
+ggplot(data_long, aes(x=categorie, y=indice_adaptation, fill=categorie)) +
+  stat_summary(fun="mean", geom="bar") +
+  facet_wrap(~variable, scales="free_x") +
+  labs(title="Indice moyen d’adaptation selon les caractéristiques socio-économiques",
+       x="Catégories", y="Indice moyen") +
+  theme_minimal() +
+  theme(legend.position="none")+
+ scale_fill_viridis_d(option = "cividis")
+
+```
+L’analyse descriptive de l’indice moyen d’adaptation révèle des variations notables entre les différents groupes de producteurs.
+Les hommes semblent adopter un plus grand nombre de stratégies d’adaptation que les femmes.
+De même, les producteurs ayant un niveau d’instruction secondaire ou supérieur présentent des indices moyens plus élevés que ceux du niveau primaire et ceux qui n'ont pas eu à fréquenter; suggérant que l’éducation favorise la compréhension et l’application des mesures d’adaptation.
+Les producteurs plus âgés ou ayant une expérience plus longue sur l’exploitation affichent  des niveaux d’adaptation vraiment bas .Ces observations permettent de constater que le niveau d’adaptation n’est pas homogène et varie selon les caractéristiques socio-économiques.
+La régression multivariée qui suit permettra de confirmer quels facteurs ont un effet significatif lorsque l’on contrôle simultanément toutes les variables.
+
+Etablissons la regression linéaire multiple 
+
+```{r}
+install.packages(c("dplyr","tidyr","ggplot2","viridis","stargazer"))
+
+```
+
+```{r}
+adaptation_binaire$sexe <- factor(adaptation_binaire$sexe)
+adaptation_binaire$etude <- factor(adaptation_binaire$etude)
+adaptation_binaire$age <- factor(adaptation_binaire$age)
+adaptation_binaire$expérience <- factor(adaptation_binaire$expérience)
+
+
+```
+
+```{r}
+modele <- lm(
+  indice_adaptation ~  age + sexe + etude +
+    expérience,
+  data = adaptation_binaire
+)
+
+```
+
+```{r}
+# supprimons l’ancienne version
+remove.packages("stargazer")
+# réinstallons proprement
+install.packages("stargazer", dependencies = TRUE)  
+# chargeons le package
+library(stargazer)                  
+
+
+
+stargazer(modele, type = "text", title = "Régression linéaire multiple sur l'indice d'adaptation",
+          digits = 3, out = NULL)
+
+```
+on a extaire les données pour l'annalyse.
+```{r}
+coef_df <- data.frame(
+  term = names(coef(modele)),
+  estimate = coef(modele),
+  stringsAsFactors = FALSE
+)
+head(coef_df )
+```
+introduisons un standard d'erreur
+```{r}
+coef_df$se <- summary(modele)$coefficients[, "Std. Error"]
+
+```
+Visualisons les coefficients avec ggplot2 
+```{r}
+library(ggplot2)
+library(viridis)
+
+# df avec coefficients et erreur standard
+coef_df <- data.frame(
+  term = names(coef(modele))[-1],        # on enlève l'intercept
+  estimate = coef(modele)[-1],
+  se = summary(modele)$coefficients[-1, "Std. Error"]
+)
+
+ggplot(coef_df, aes(x = reorder(term, estimate), y = estimate, fill = term)) +
+  geom_col() +
+  geom_errorbar(aes(ymin = estimate - se, ymax = estimate + se), width = 0.2) +
+  coord_flip() +
+  labs(title = "Effet des variables sur l'indice d'adaptation",
+       x = "Variable", y = "Coefficient") +
+  theme_minimal() +
+  theme(legend.position = "none") +
+  scale_fill_viridis_d(option = "cividis")  # couleur fluide et daltonien-friendly
+
+
+```
+Dans l’ensemble, l’analyse montre que ce sont surtout les études qui aident les producteurs à mieux s’adapter.
+Le sexe, l’âge et l’expérience ont, eux, un impact plus faible ou moins marqué.
+Ces résultats confirment que la capacité à s’adapter dépend beaucoup des caractéristiques socio-économiques .
+Ils montrent aussi que l’adaptation n’est pas la même pour tous : certaines personnes rencontrent encore des difficultés face au changement climatique.
+
+Relation entre l'adaptation des producteurs et le types d'agriculture
+```{r}
+adaptation_binaire$type_agri<- data_clean$type_agri
+head(adaptation_binaire)
+library(dplyr)
+
+adaptation_binaire %>%
+  group_by(type_agri, niveau_adaptation) %>%
+  summarise(n = n()) %>%
+  mutate(pourcentage = n / sum(n) * 100)
+
+```
+Dans cette analyse, nous cherchons à savoir si le type d’agriculture pratiqué par les producteurs (Pluvial ou Mixte) est lié à leur niveau d’adaptation (Faible ou Élevé).Vu  que les effectifs de certaines catégories sont relativement faibles, nous utilisons le test exact de Fisher.
+
+Construisons le tableau croisé
+```{r}
+# Créons le  tableau croisé à partir des données
+tab <- table(adaptation_binaire$type_agri, adaptation_binaire$niveau_adaptation)
+tab
+
+```
+
+Application du test de fisher
+```{r}
+# Test exact de Fisher
+fisher_result <- fisher.test(tab)
+fisher_result
+
+```
+Le test exact de Fisher  révèlé aucune association statistiquement significative entre le type d’agriculture pratiqué et le niveau d’adaptation des producteurs (p = 1).Ainsi,le niveau d’adaptation apparaît indépendant du système de production.
+
+EN RESUME
+Les analyses montrent que les producteurs perçoivent bien les phénomènes climatiques et leurs effets, mais la majorité ne savent pas comment s’y adapter. Seule une minorité a réussi à s’adapter, principalement grâce à son niveau d’instruction. Ainsi, l'hypothese02 : Les producteurs perçoivent fortement les impacts du changement climatique sur leur production, mais leur niveau d’adaptabilité varie significativement selon leurs caractéristiques socio-économiques et leur contexte géographique. est confirmé
+
+
+
+
