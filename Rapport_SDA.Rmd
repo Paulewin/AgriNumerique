@@ -71,14 +71,14 @@ simulation$suggestions <- as.factor(simulation$suggestions)
 Le tableau ci dessous résume la possession de téléphone et les proportions d'accès des agiculteurs à internet
 
 ```{r, echo=FALSE}
-summary(simulation[, 22:23])
+head(summary(simulation[, 22:23]))
 ```
 
 
 
 ```{r, echo=FALSE}
 library(ggplot2)
-ggplot(simulation, aes(x = possession_telephone, fill = possession_telephone)) + geom_bar(position = "dodge") + labs(title = "Histogramme de possession d'un téléphone", x = "Possède un téléphone", y = "Proportion", fill = "Accès à l'info") + theme_minimal()
+ggplot(simulation, aes(x = possession_telephone, fill = possession_telephone)) + geom_bar(position = "dodge") + labs(title = "Histogramme de possession d'un téléphone", x = "Possède un téléphone", y = "Proportion", fill = "Possession de téléphone") + theme_minimal()
 ```
 
 
@@ -154,7 +154,7 @@ library(ggplot2)
 ggplot(simulation, aes(x = commune, fill = acces_internet)) +
   geom_bar(position = "fill") +
   scale_y_continuous(labels = scales::percent) +
-  labs(title = "Disparité d'accès à Internet par Commune",
+  labs(title = "Graphe C1: Disparité d'accès à Internet par Commune",
        y = "Pourcentage", x = "Communes") +
   theme_minimal()
 
@@ -162,7 +162,7 @@ library(ggplot2)
 ggplot(simulation, aes(x = culture1, fill = possession_telephone)) +
   geom_bar(position = "fill") +
   scale_y_continuous(labels = scales::percent) +
-  labs(title = "Disparité de possession de telephone par culture",
+  labs(title = "Graphe C2: Disparité de possession de telephone par culture",
        y = "Pourcentage", x = "Communes") +
   theme_minimal()
 
@@ -217,8 +217,8 @@ aggregate(score_SMS_alerte ~ culture1, data = simulation, FUN = mean)
 aggregate(score_resaux_sociaux ~ culture1, data = simulation, FUN = mean)
 aggregate(score_autre_outil ~ culture1, data = simulation, FUN = mean)
 ```
-Il y  a de différence statistique dans l'utilisation des outils numériques à savoir: SMS alete, réseaux sociaux en fonction de la culture pratiquée. 
-En somme, ls test de dépendance de la possession et de l'accès au telephone n'est pas significatif  alors que l'usage des outls numériques l'est. Cela veut dire que la barrière est l'accès (posséder le téléphone).
+Il n'y  a pas de différence statistique dans l'utilisation des outils numériques à savoir: SMS alete, réseaux sociaux en fonction de la culture pratiquée. 
+En somme, ls test de dépendance de la possession et de l'accès au telephone est significatif  alors que l'usage des outls numériques l'est. Cela veut dire que la barrière est l'accès (posséder le téléphone).
 Mais qu'une fois qu'ils l'ont, ils l'utilisent tous de la même façon.
 
 ```{r, echo=FALSE}
@@ -241,9 +241,6 @@ summary(anova_autre_outil_culture)
 
 ## Typologie des producteurs selon leur niveau de connexion
 Nous avons regroupé les agriculteurs en trois catégories:
-* Le connecté * (niveau d'étude supérieur, agé de 25à 40ans et utilisant régulièrement les outils numériques)
-* L'intermédiaire* (niveau d'étude primaire, agé de 25 à 40 ans et utilisant les outils numériques )
-* Le non connecté* (Aucun niveau d'étude, agé de 41 à 60 ans n'utilisant pas les outils numériques)
 
 ```{r, echo=FALSE}
 simulation$connecte_num <- ifelse(simulation$acces_internet == "Oui", 1, 0)
@@ -261,6 +258,65 @@ typologie_finale <- aggregate(connecte_num ~ sexe + etude + age + commune + cult
 typologie_finale <- typologie_finale[order(-typologie_finale$connecte_num), ]
 print(typologie_finale)
 ```
+
+
+```{r}
+simulation$profil_techno <- interaction(simulation$possession_telephone, simulation$acces_internet, sep = " + Int: ")
+# Charger les outils
+library(FactoMineR)
+library(factoextra)
+
+# Lancer l'ACM
+# Supposons que possession_tel est en col 7 et acces_internet en col 8
+res.mca <- MCA(simulation[, c("sexe", "age", "etude", "commune", "culture1", 
+                             "possession_telephone", "acces_internet")], 
+               quali.sup = c("possession_telephone", "acces_internet"), # On désigne tes deux variables de connexion comme illustratives
+               graph = FALSE)
+
+# Visualisation ciblée sur la connexion
+fviz_mca_biplot(res.mca, 
+                invisible = "ind", # On cache les individus pour y voir clair
+                habillage = "possession_telephone", # On colore par type de téléphone
+                palette = "jco",
+                repel = TRUE,
+                title = "Typologie des producteurs selon leur niveau de connexion")
+
+```
+
+L'analyse de l'ACM permet de classer les producteurs en 3 groupes.
+
+Groupe 1 : Les "Connectés"
+Ce groupe se situe dans le quadrant est/sud-est (à droite) de l'ACM, là où les variables de connexion sont les plus dynamiques.
+
+Profil Socio-économique : Jeunes (25 à 40 ans), niveau d'étude secondaire ou supérieur.
+
+Localisation & Cultures : Principalement à Parakou ou Dogbo ; cultures de rente comme le Coton, l'Ananas ou le Manioc.
+
+Niveau de Connexion : Possession de smartphones et accès à internet (souvent ou occasionnellement).
+
+Solution adaptée : Application mobile complète avec graphiques, prévisions météo haute résolution et gestion parcellaire par GPS.
+
+Groupe 2 : Les "transitiffs"
+Ce groupe gravite autour du centre et de la zone sud du graphique.
+
+Profil Socio-économique : Producteurs mâtures (41 à 60 ans), niveau d'instruction primaire.
+
+Localisation & Cultures : Présents à Misserete ou Bopa ; cultures diversifiées (Maïs, Tomates).
+
+Niveau de Connexion : Possèdent un téléphone basique ou un smartphone, mais l'accès à internet est rare voire inexistant. Ils utilisent surtout les appels et SMS.
+
+Solution adaptée : Interface hybride privilégiant les alertes par SMS ou messages vocaux, avec une application mobile très légère (bas débit) qui fonctionne hors-ligne.
+
+Groupe 3 : Les "traditionels"
+Ce groupe est projeté à l'ouest (gauche) du graphique.
+
+Profil Socio-économique : Producteurs âgés, niveau d'étude "Aucun".
+
+Localisation & Cultures : Communes plus enclavées comme Bonou ou Adjohoun ; spécialisés dans le Palmier à huile ou cultures pluviales de subsistance (Grandes surfaces).
+
+Niveau de Connexion : Pas de téléphone ou téléphone basique uniquement. Aucun accès internet.
+
+Solution adaptée : La solution numérique ne peut pas les atteindre directement. Il faut passer par un intermédiaire (conseiller agricole) équipé d'une tablette, ou utiliser des radios communautaires pour diffuser les infos climatiques.
 
 # Obstacles à l'accès au numérique
 

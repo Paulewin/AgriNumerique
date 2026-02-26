@@ -120,6 +120,10 @@ ggplot(simulation, aes(x = commune, fill = culture1)) +
 table_croise <- table(simulation$commune, simulation$culture1)
 test_fisher <- fisher.test(table_croise, simulate.p.value = TRUE)
 print(test_fisher)
+
+table_croise <- table(simulation$commune, simulation$superficie_total_finale)
+test_fisher2 <- fisher.test(table_croise, simulate.p.value = TRUE)
+print(test_fisher2)
 ```
 
 il n'y a pas de relation entre la commune et la culture pratiquée. Cela signifie que le choix de la culture ne dépend pas de la localisation géographique de l'agriculteur. Un agriculteur à Dogbo a statistiquement les mêmes chances de cultiver de l'ananas qu'un agriculteur à Parakou. Puisque la culture ne change pas selon la commune, il n'est pas utile de créer des solutions spécifiques à chaque région. Une solution numérique "générique" pour les cultures peut fonctionner partout.
@@ -129,14 +133,14 @@ il n'y a pas de relation entre la commune et la culture pratiquée. Cela signifi
 
 ggplot(simulation, aes(x = sexe, y = superficie_total_finale, fill = sexe)) +
   geom_boxplot() +
-  labs(title = "Superficie exploitée selon le sexe")
+  labs(title = "Graphe A2: Superficie exploitée selon le sexe")
 
 table_croise <- table(simulation$sexe, simulation$superficie_total_finale)
 test_fisher <- fisher.test(table_croise, simulate.p.value = TRUE)
 print(test_fisher)
 ```
 
-Il n'y a aucun lien statistique entre le sexe de l'agriculteur et la superficie de son exploitation. Les femmes ne cultivent pas des surfaces significativement plus petites (ou plus grandes) que les hommes. Pour la solution numérique, cela implique que les fonctionnalités liées à l'arpentage ou à la gestion parcellaire peuvent être standardisées sans distinction de genr
+Il n'y a aucun lien statistique entre le sexe de l'agriculteur et la superficie de son exploitation. Les femmes ne cultivent pas des surfaces significativement plus petites (ou plus grandes) que les hommes. Pour la solution numérique, cela implique que les fonctionnalités liées à l'arpentage ou à la gestion parcellaire peuvent être standardisées sans distinction de genre
 
 ## type d'agriculture et niveau d'étude
 ```{r, echo=FALSE}
@@ -145,7 +149,7 @@ ggplot(simulation, aes(x = etude, fill = type_agri)) +
   geom_bar(position = "fill") + # "fill" crée des barres de hauteur égale (100%)
   scale_y_continuous(labels = scales::percent) + # Affiche des pourcentages en Y
   labs(
-    title = "Répartition du type d'agriculture selon le niveau d'étude",
+    title = "Graphe A1: Répartition du type d'agriculture selon le niveau d'étude",
     x = "Niveau d'étude",
     y = "Proportion (%)",
     fill = "Type d'agriculture"
@@ -158,7 +162,7 @@ test_fisher <- fisher.test(table_croise, simulate.p.value = TRUE)
 print(test_fisher)
 ```
 
-Le test de Fisher entre le niveau d'étude et le type d'agriculture ($p = 0,10$) indique que le niveau d'étude influence un peu le type d'agriculture. Cela suggère que si l'instruction joue un rôle dans l'adoption de techniques agricoles spécifiques, elle n'est pas le seul moteur du changement.l'outil pourrait proposer des modules de formation aux agriculteurs.
+Le test de Fisher entre le niveau d'étude et le type d'agriculture ($p = 0,10$) indique que le niveau d'étude influence un peu le type d'agriculture. Cela suggère que si l'instruction joue un rôle dans l'adoption de techniques agricoles spécifiques, elle n'est pas le seul moteur du changement. L'outil pourrait proposer des modules de formation aux agriculteurs.
 
 
 # Analyse factorielle avec les profils
@@ -174,6 +178,7 @@ simulation$age <- as.factor(simulation$age)
 
 library(FactoMineR)
 library(factoextra)
+library(dplyr)
 
 simulation_analyse <- simulation %>% 
   select(sexe, age, etude, commune,           # Profil
@@ -186,6 +191,7 @@ res.mca <- MCA(simulation_analyse, graph = FALSE)
 fviz_mca_var(res.mca, 
              repel = TRUE, 
              choice = "var.cat", # Visualise les catégories
+             title = "Graphe A3: Analyse en composante multiple",
              shape.var = 15,     # Carrés pour les points
              col.var = "blue",
              ggtheme = theme_minimal())
@@ -201,4 +207,4 @@ Le segment C (Gauche)
 Profil : Pas d'instruction, grandes surfaces de palmier/tomates ou agriculture pluviale.
 
 # Conclusion partielle
-L'analyse statistique, bien que révélant une certaine homogénéité des pratiques à travers les tests de Fisher, souligne par l'ACM une structuration de l'espace agricole où le capital scolaire commence à orienter les choix techniques. Cette absence de clivages rigides prouve que les systèmes de production ne sont pas dictés par la fatalité du profil social, mais restent ouverts à une transformation par l'outil numérique. Dès lors, la solution proposée doit être universelle dans ses fonctions mais inclusive dans son ergonomie, afin de convertir ces tendances latentes en une adoption généralisée des meilleures pratiques agricoles.
+L'analyse statistique, bien que révélant une certaine homogénéité des pratiques à travers les tests de Fisher, souligne par l'ACM une structuration de l'espace agricole où le capital scolaire commence à orienter les choix des techniques de production. Ces résultats prouvent que les systèmes de production ne sont pas dictés essentiellement par le profil social, mais restent ouverts à une transformation par l'outil numérique. Dès lors, la solution proposée doit offrir les mêmes fonctionnalités mais être inclusive dans son ergonomie pour une adption généralisée des meilleures pratiques agricoles.

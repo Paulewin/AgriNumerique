@@ -14,9 +14,7 @@ knitr::opts_chunk$set(echo = TRUE)
 # Affichons d'abord les noms des colonnes
 
 ```{r}
-library(readr)
-Agri_Numérique <- read_csv("Agri Numérique_  VF.csv")
-View(Agri_Numérique)
+colnames(Agri_Numérique)
 ```
 
 # Supprimer la première colonne
@@ -330,6 +328,7 @@ for (nom in cols_cat) {
 # Créer un fichier csv
 
 ```{r}
+write.csv(df_simule, "Simulation_AgriN.csv", row.names = FALSE)
 simulation <- read.csv("Simulation_AgriN.csv")
 View(simulation)
 
@@ -346,7 +345,7 @@ head(simulation)
 ```{r}
 cols_a_vider <- c("moyen1", "Moyen2", "Moyen3")
 
-simulation[simulation$moyen_gestion_risques == "Non", cols_a_vider] <- NA
+Simulation_AgriN[Simulation_AgriN$moyen_gestion_risques == "Non", cols_a_vider] <- NA
 
 
 ```
@@ -354,7 +353,7 @@ simulation[simulation$moyen_gestion_risques == "Non", cols_a_vider] <- NA
 ```{r}
 cols_a_vider <- c("liste_phenomene_clima_obs ", "effets_phenomene_clima_obs")
 
-simulation[simulation$phenomene_clima_obs == "Non", cols_a_vider] <- NA
+Simulation_AgriN[Simulation_AgriN$phenomene_clima_obs == "Non", cols_a_vider] <- NA
 
 ```
 
@@ -389,7 +388,7 @@ colonne <- "phenomene_clima_obs"
 # Calcul effectif et pourcentage pour la colonne 'phenomene_clima_obs' de Simulation_AgriN
 
 # Supprimer les NA pour plus de sécurité
-data_clean <- simulation[!is.na(simulation$phenomene_clima_obs), ]
+data_clean <- Simulation_AgriN[!is.na(Simulation_AgriN$phenomene_clima_obs), ]
 
 # Calcul de l'effectif
 effectif <- table(data_clean$phenomene_clima_obs)
@@ -419,7 +418,7 @@ head(resultat)
 library(dplyr)
 
 # Créons un nouveau tableau avec uniquement la colonne effets climatique observés
-effet_climatique <-simulation %>%
+effet_climatique <-Simulation_AgriN %>%
   select( effets_phenomene_clima_obs)
 
 # Vérifier
@@ -527,7 +526,7 @@ construisons pour le pourcentage
 ```{r}
 ggplot(frequences, aes(x = Effet, y = Pourcentage)) +
   geom_bar(stat = "identity", fill = "darkgreen") +
-  labs(title = "Graphe B2: Pourcentage de producteurs par effet climatique",
+  labs(title = "Pourcentage de producteurs par effet climatique",
        x = "Effet",
        y = "Pourcentage (%)") +
   theme_minimal() +
@@ -581,7 +580,7 @@ Dans un premier temps nous allons extraire la colonne
 moyen_gestion_risque et lui affecter un ID.
 
 ```{r}
-moyen_gestion_risques  <- simulation$moyen_gestion_risques
+moyen_gestion_risques  <- Simulation_AgriN$moyen_gestion_risques
 
 head(moyen_gestion_risques)
 ```
@@ -625,7 +624,7 @@ resultat
 Possédons à l'extraction des 03moyens et affectons leurs l'ID
 
 ```{r}
-gestion_risques_df  <- simulation[, c("moyen1", "Moyen2", "Moyen3")]
+gestion_risques_df  <- Simulation_AgriN[, c("moyen1", "Moyen2", "Moyen3")]
 
 head(gestion_risques_df)
 ```
@@ -716,7 +715,7 @@ table(adaptation_binaire$niveau_adaptation)
 ```{r}
 barplot(table(adaptation_binaire$niveau_adaptation),
         col = c("Dark blue","gold","light blue"),
-        main = "Graphe B3: Niveaux d'adaptation des producteurs",
+        main = "Niveaux d'adaptation des producteurs",
         ylab = "Nombre de producteurs")
 
 ```
@@ -739,7 +738,7 @@ head(adaptation_binaire)
 
 ```{r}
 library(dplyr)
-# Pour le  sexe
+Pour le  sexe
 adaptation_binaire %>%
   group_by(sexe, niveau_adaptation) %>%
   summarise(n = n()) %>%
@@ -807,7 +806,7 @@ data_long <- adaptation_binaire %>%
 ggplot(data_long, aes(x=categorie, y=indice_adaptation, fill=categorie)) +
   stat_summary(fun="mean", geom="bar") +
   facet_wrap(~variable, scales="free_x") +
-  labs(title="Graphe B4: Indice moyen d’adaptation selon les caractéristiques socio-économiques",
+  labs(title="Indice moyen d’adaptation selon les caractéristiques socio-économiques",
        x="Catégories", y="Indice moyen") +
   theme_minimal() +
   theme(legend.position="none")+
@@ -889,7 +888,7 @@ ggplot(coef_df, aes(x = reorder(term, estimate), y = estimate, fill = term)) +
   geom_col() +
   geom_errorbar(aes(ymin = estimate - se, ymax = estimate + se), width = 0.2) +
   coord_flip() +
-  labs(title = "Graphe B5: Effet des variables sur l'indice d'adaptation",
+  labs(title = "Effet des variables sur l'indice d'adaptation",
        x = "Variable", y = "Coefficient") +
   theme_minimal() +
   theme(legend.position = "none") +

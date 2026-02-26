@@ -1,0 +1,348 @@
+---
+title: "Amélioration de la résilience des producteurs agricoles face au changement climatique au Bénin"
+author:  DENAKPO Paule, DEDEGBE Bonifacia, DIMON Elodie, BOURAIMA Oulfath, AZONGNIDE Glwadys
+date: "`r Sys.Date()`"
+bibliography: Reference.bib
+biblio-style: APA
+citation_package: biblatex
+output: 
+  html_document: 
+    toc: true
+    number_sections: true
+    
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# Contexte et justification 
+Au Bénin, le changement climatique transforme profondément l’agriculture à tavers divers phénomènes comme: l'irrégularité des pluies,  les sécheresses fréquentes et bien d'autres @sodjinou2019. Ces derniers  perturbent la production et réduisent  considérablement les rendements (Aho et al). Cependant, tous les producteurs ne sont pas affectés de la même manière. Certains démontrent une capacité d’adaptation qui leur permet de limiter les pertes, tandis que d’autres restent fortement vulnérables @amegnaglo, 2016). Cette variabilité suggère que plusieurs facteurs peuvent  influencer la résilience des exploitations. Identifier et comprendre ces déterminants nous permettra  non seulement de  concevoir des stratégies mais aussi de trouver des solutions fondées sur des données probantes afin d’améliorer durablement la résilience des producteurs agricoles et renforcer la sécurité alimentaire au Bénin, ainsi que les conditions de vie de ces exploittions.
+
+# Bref résumé du projet 
+ Ce projet a pour but  de développer une solution numérique innovante pour aider les producteurs à anticiper les risques liés aux aléas climatiques et à adopter des pratiques agricoles adaptées. En sécurisant la production, cet outil améliorera la disponibilité et l’accès à la nourriture pour les communautés rurales et renforcera leur capacité à faire face aux changements  climatiques. Ce projet vise à renforcer durablement la résilience des producteurs agricoles au Bénin par une une combinaison de la technologie et des connaissances scientifiques.
+ 
+# Objectif du projet
+
+## Objectif général
+ L'objectif général de ce projet est de contribuer à la résilience des producteurs béninois dans un contexte de changement climatique 
+ 
+## Objectifs Spécifiques(OS)
+
+* *0S1 : Caractériser le profil socio-économique et le système de production des agriculteurs*
+
+* *0S2 : Evaluer la perception des producteurs par rapport aux impacts du changement climatique sur la production agricole et leurs niveaux d’adaptation*
+
+* *0S3 : Évaluer le niveau d’accès des producteurs à l’information climatique et les obstacles à l’adoption de solutions numériques et agricoles* 
+
+* *0S4 : Hiérarchiser les besoins des producteurs en matière de plateforme numérique*
+
+
+## Hypothèses 
+
+*	*H1 : Le profil socio-économique des producteurs (âge, éducation, ressources) détermine directement leur système de production (choix techniques, surfaces, diversification)*
+
+*	*H2 : Les producteurs perçoivent fortement les impacts du changement climatique sur leur production, mais leur niveau d’adaptabilité varie significativement selon leurs caractéristiques socio-économiques, leur accès aux ressources et leur contexte géographique*
+
+*	*H3 : L'accès et l'usage du numérique par les producteurs est fortement déterminé par la disponibilité technique de la solutions et aussi par les facteurs socio-économiques, infrastructurels et cognitifs*
+
+*	*H4 : Les producteurs préfèrent une plateforme basique mais accessible à 100% plutôt qu'une plateforme sophistiquée accessible à 30%*
+
+# Méthodologie
+
+## Collecte, Traitement et Analyse des Données
+
+**Collecte de données**
+
+Les données ont été collectées à l’aide d’un  Google form. Le questionnaire a été diffusé dans les forums d'agriculteurs d'une part puis administré directement à des producteurs sur le terrain d'autre part. Il comprend des questions à la fois fermées et semi-fermées portant sur le profil socio-économique des producteurs, les impacts du changement climatique, l’accès à l’information climatique, les pratiques d’adaptation et les besoins en services numériques agricoles de ces derniers. 
+
+**Traitement des données **
+
+Les données recueillies  ont été validées, nettoyées, structurées et simulées avant d’être analysées afin d’identifier les tendances et les relations significatives. Leur interprétation a permi de générer une solution fiable adaptée à aux conditions de vie des producteurs, transformant ainsi l’information brute en outil décisionnel pour réduire les pertes et renforcer la résilience des producteurs.
+
+**Analyse des données **
+
+Les données traitées ont été codées, saisies et analysées à l’aide du logiciel RStudio. L’analyse comprend des statistiques descriptives (fréquences, pourcentages, moyennes), des tableaux de contingence pour examiner les relations entre variables, ainsi que le test exact de Fisher pour évaluer les associations significatives. Des modèles de régression linéaire et logistique ont également été appliqués afin d’identifier les facteurs explicatifs et de mesurer leur influence sur la variable d’intérêt.
+
+## Outils et Techniques de Collecte de Données
+
+**Outils de collecte de données**
+
+Les données ont été collectées grâce à une enquête numérique via Google Forms, permettant de saisir directement les informations sur les pratiques agricoles, les impacts climatiques et le profil socio-économique des producteurs.
+
+**Techniques de Collecte de Données**
+
+Le lien du Google Forms a été envoyer  directement aux producteurs que nous connaissons,  qsui à leur tour en relayé le Google Forms à leur entourage, via les réseaux sociaux et les groupes d’appartenance. Cette approche ciblée a permis de joindre un large éventail de participants tout en assurant que les informations recueillies reflètent fidèlement les pratiques agricoles et l’expérience des producteurs face aux aléas climatiques.
+
+# Résultats
+
+## Principales Informations Dérivées de l’Analyse des Données
+
+Notre étude s'est basé sur les objectifs spécifiques et leur hypothèses respectives.
+
+**OS1:Caractériser le profil socio-économique et le système de production des agriculteurs enquêtés** 
+Les résultats de l’analyse montrent que le lien entre le niveau d’étude et le type d’agriculture (Graphe A1) reste modéré (test exact de Fisher, p = 0,10). Cela indique que l’instruction peut influencer l’adoption de certaines techniques agricoles, sans toutefois constituer le principal facteur déterminant des pratiques de production. 
+```{r, echo=FALSE}
+knitr::include_graphics("/cloud/project/Graphe A1.png")
+
+```
+
+En revanche, aucune relation statistiquement significative (p =0,89) n’a été observée entre le sexe de l’agriculteur et la superficie exploitée, ce qui suggère que les hommes et les femmes disposent de surfaces agricoles comparables (Graphe A2). De même, l’analyse ne met pas en évidence de relation entre la commune de résidence et la culture pratiquée, traduisant une relative homogénéité des choix culturaux entre les territoires étudiés.
+
+```{r, echo=FALSE}
+knitr::include_graphics("/cloud/project/Graphe A2.png")
+
+```
+
+Ces résultats montrent que les systèmes de production ne sont pas strictement structurés par les caractéristiques sociales ou territoriales des producteurs. L’hypothèse 1 est ainsi partiellement validée. L’ACM (Graphe A3) révèle néanmoins une organisation de l’espace agricole où le capital scolaire commence à orienter certains choix techniques. 
+
+```{r, echo=FALSE}
+knitr::include_graphics("/cloud/project/Graphe A3 bon.png")
+
+```
+
+**•	0S2 : Evaluer la perception des producteurs par rapport aux impacts du changement climatique sur la production agricole et leurs niveaux d’adaptation**
+Les analyses révèlent l’ampleur des effets du changement climatique sur les exploitations agricoles. Près de 95 % des producteurs ont observé les phénomènes climatiques et leurs impacts au cours des dix dernières années(voir tableau B1).
+
+```{r, echo=FALSE}
+simulation <- read.csv("Simulation_AgriN.csv")
+cols_a_vider <- c("moyen1", "Moyen2", "Moyen3")
+
+simulation[simulation$moyen_gestion_risques == "Non", cols_a_vider] <- NA
+cols_a_vider <- c("liste_phenomene_clima_obs ", "effets_phenomene_clima_obs")
+
+simulation[simulation$phenomene_clima_obs == "Non", cols_a_vider] <- NA
+
+# Nom de la colonne
+colonne <- "phenomene_clima_obs"
+
+# Calcul effectif et pourcentage pour la colonne 'phenomene_clima_obs' de Simulation_AgriN
+
+# Supprimer les NA pour plus de sécurité
+data_clean <- simulation[!is.na(simulation$phenomene_clima_obs), ]
+
+# Calcul de l'effectif
+effectif <- table(data_clean$phenomene_clima_obs)
+
+# Calcul du pourcentage
+pourcentage <- prop.table(effectif) * 100
+
+# Création du tableau final clair
+resultat <- data.frame(
+  Phenomene = names(effectif),
+  Effectif = as.vector(effectif),
+  Pourcentage = round(as.vector(pourcentage), 2)
+)
+
+# Afficher le résultat
+print(resultat)
+
+
+```
+
+La majorité des producteurs (92 %) constate une chute notable des rendements (66 %), tandis que maladies, ravageurs (66 %), pertes totales (44 %) et dégradation des sols (42 %) compliquent leur production voir (Graphe B2). 
+
+```{r, echo=FALSE}
+knitr::include_graphics("/cloud/project/Graphe B2.png")
+
+```
+
+
+Avec un indice moyen de perception de 0,61, (Graphe B3) il est clair que les producteurs ressentent intensément ces changements et leurs conséquences.Dans le prolongement de ces résultats, l’analyse des caractéristiques socio-économiques met clairement en évidence les disparités observées en matière d’adaptation. 
+
+```{r, echo=FALSE}
+knitr::include_graphics("/cloud/project/Graphe B3.png")
+
+```
+
+
+Les producteurs ayant un niveau d’instruction secondaire ou supérieur présentent des indices moyens d’adaptation plus élevés que ceux du primaire ou sans instruction, ce qui suggère que l’éducation facilite la compréhension et l’application des stratégies d’ajustement. À l’inverse, les producteurs plus âgés ou disposant d’une longue expérience affichent des niveaux d’adaptation relativement faibles, traduisant une possible inertie face à l’innovation ou un accès limité à l’information (Graphe B4).
+
+```{r, echo=FALSE}
+knitr::include_graphics("/cloud/project/Graphe B4.png")
+
+```
+
+
+Ces constats confirment que l’adaptation n’est pas homogène mais varie selon les caractéristiques socio-économiques(voir graphe B5). 
+
+```{r, echo=FALSE}
+knitr::include_graphics("/cloud/project/Graphe B5.png")
+
+```
+
+
+Par ailleurs, le test exact de Fisher ne révèle aucune association statistiquement significative entre le type d’agriculture pratiqué et le niveau d’adaptation (p = 1), indiquant que l’adaptabilité apparaît indépendante du système de production. Ainsi, bien que les producteurs perçoivent fortement les impacts du changement climatique, la majorité demeure faiblement adaptée, tandis qu’une minorité, principalement plus instruite, parvient à développer des stratégies efficaces. Ces résultats confirment l’hypothèse 02 selon laquelle la perception des impacts est élevée, mais le niveau d’adaptabilité varie significativement selon les caractéristiques socio-économiques et le contexte géographique.
+
+**•	0S3 : Évaluer le niveau d’accès des producteurs à l’information climatique et les obstacles à l’adoption de solutions numériques et agricoles**.
+
+
+Les résultats empiriques montrent que 94% des producteurs possèdent un téléphone. Mais malgré la disponibilité de l'outil, seuls 35% d'entre eux ont accès àinternet (Tableau C1).
+
+```{r, echo=FALSE}
+library(readr)
+simulation <- read.csv("Simulation_AgriN.csv")
+simulation$sexe <- as.factor(simulation$sexe)
+simulation$age <- as.factor(simulation$age)
+simulation$etude <- as.factor(simulation$etude)
+simulation$vilage <- as.factor(simulation$vilage)
+simulation$commune <- as.factor(simulation$commune)
+simulation$type_agri <- as.factor(simulation$type_agri)
+simulation$culture1 <- as.factor(simulation$culture1)
+simulation$culture2 <- as.factor(simulation$culture2)
+simulation$culture3 <- as.factor(simulation$culture3)
+simulation$unite_superficie_maïs <- as.factor(simulation$unite_superficie_maïs)
+simulation$unite_superficie_total <- as.factor(simulation$unite_superficie_total)
+simulation$expérience <- as.factor(simulation$expérience)
+simulation$phenomene_clima_obs <- as.factor(simulation$phenomene_clima_obs)
+simulation$liste_phenomene_clima_obs <- as.factor(simulation$liste_phenomene_clima_obs)
+simulation$moyen_gestion_risques <- as.factor(simulation$moyen_gestion_risques)
+simulation$moyen1 <- as.factor(simulation$moyen1)
+simulation$Moyen2 <- as.factor(simulation$Moyen2)
+simulation$Moyen3 <- as.factor(simulation$Moyen3)
+simulation$possession_telephone <- as.factor(simulation$possession_telephone)
+simulation$acces_internet <- as.factor(simulation$acces_internet)
+simulation$Utilisation_outils_numeriques <- as.factor(simulation$Utilisation_outils_numeriques)
+simulation$precisez_lesquels <- as.factor(simulation$precisez_lesquels)
+simulation$frequence_appli_mobiles <- as.factor(simulation$frequence_appli_mobiles)
+simulation$frequence_plateformes_web. <- as.factor(simulation$frequence_plateformes_web.)
+simulation$frequence_SMS_alerte.pretoce. <- as.factor(simulation$frequence_SMS_alerte.pretoce.)
+simulation$frequence_reseaux_sociaux.agricoles <- as.factor(simulation$frequence_reseaux_sociaux.agricoles)
+simulation$frequence_autres_outils <- as.factor(simulation$frequence_autres_outils)
+simulation$obstacles_au_numerique <- as.factor(simulation$obstacles_au_numerique)
+simulation$informations_souhaitee_recevoir <- as.factor(simulation$informations_souhaitee_recevoir)
+simulation$forme_reception_préfere <- as.factor(simulation$forme_reception_préfere)
+simulation$langues_adaptes <- as.factor(simulation$langues_adaptes)
+simulation$Langue_locale_majoritaire <- as.factor(simulation$Langue_locale_majoritaire)
+simulation$fonctionalite_application <- as.factor(simulation$fonctionalite_application)
+simulation$caracteristique_principale_application <- as.factor(simulation$caracteristique_principale_application)
+simulation$gestionnaire <- as.factor(simulation$gestionnaire)
+simulation$appli_numerique_gere_aleas_climatiques <- as.factor(simulation$appli_numerique_gere_aleas_climatiques)
+simulation$conditions_utilisation <- as.factor(simulation$conditions_utilisation)
+simulation$contribution_symbolique <- as.factor(simulation$contribution_symbolique)
+simulation$suggestions <- as.factor(simulation$suggestions)
+summary(simulation[, 22:23])
+
+```
+Le test de Fisher révèle de relation statistiquement significative entre la possession d'un téléphone  et le type de culture pratiqué (p =  0.01594) d'une part, et entre l'accès à internet et la commune (p =  0.2238) d'autre part.   
+
+```{r, echo=FALSE}
+simulation$score_appli_mobile <- as.numeric(as.factor(simulation$frequence_appli_mobiles))
+simulation$score_plateforme_web <- as.numeric(as.factor(simulation$frequence_plateformes_web.))
+simulation$score_SMS_alerte <- as.numeric(as.factor(simulation$frequence_SMS_alerte.pretoce.))
+simulation$score_resaux_sociaux <- as.numeric(as.factor(simulation$frequence_reseaux_sociaux.agricoles))
+simulation$score_autre_outil <- as.numeric(as.factor(simulation$frequence_autres_outils))
+
+anova_appli_comune <- aov(score_appli_mobile ~ commune, data = simulation) 
+summary(anova_appli_comune)
+
+anova_web_comune <- aov(score_plateforme_web ~ commune, data = simulation) 
+summary(anova_web_comune)
+
+anova_SMS_comune <- aov(score_SMS_alerte ~ commune, data = simulation) 
+summary(anova_SMS_comune)
+
+anova_reseau_comune <- aov(score_resaux_sociaux ~ commune, data = simulation) 
+summary(anova_reseau_comune)
+
+anova_autre_outil_comune <- aov(score_autre_outil ~ commune, data = simulation) 
+summary(anova_autre_outil_comune)
+anova_appli_culture <- aov(score_appli_mobile ~ culture1, data = simulation) 
+summary(anova_appli_culture)
+
+anova_web_culture <- aov(score_plateforme_web ~ culture1, data = simulation) 
+summary(anova_web_culture)
+
+anova_SMS_culture <- aov(score_SMS_alerte ~ culture1, data = simulation) 
+summary(anova_SMS_culture)
+
+anova_reseau_culture <- aov(score_resaux_sociaux ~ culture1, data = simulation) 
+summary(anova_reseau_culture)
+
+anova_autre_outil_culture <- aov(score_autre_outil ~ culture1, data = simulation) 
+summary(anova_autre_outil_culture)
+```
+
+Ce résultat suggère que la possession de matériel (telephone) dépends du revenu (culure) et l'accès à internet est fonction de la géographie (couverture réseau). Pour illustrer ces résultats, les graphes C1 et C2 montrent respectivement la Disparité d'accès à Internet par Commune puis la Disparité de possession de telephone par culture. Mais une fois qu'ils ont accès au numérique, ils utilisent les outils de la même façon car il n'y a pas de différence statistique dans l'utilisation des outils d'une commune à l'autre et d'une culture pratiquée à l'autre.  
+
+```{r, echo=FALSE}
+knitr::include_graphics("/cloud/project/Graphe C1.png")
+
+knitr::include_graphics("/cloud/project/Graphe C2.png")
+```
+
+Trois profils d'agriculteurs ont été constitués en fonction de leur niveau de connexion (Graphe C3): les connectés 25 à 40 ans niveau d'étude secondaire ou supérieur principalement à Parakou ou Dogbo cultures de rente Possession de smartphones et accès à internet (souvent ou occasionnellement; les transitifs 41 à 60 ans, niveau d'instruction primaire, Présents à Misserete ou Bopa cultures diversifiées Possèdent un téléphone basique ou un smartphone, mais l'accès à internet est rare voire inexistant. Ils utilisent surtout les appels et SMS; les traditionels  agés de 41 à 60 ans niveau d'étude "Aucun", localisés à Bonou ou Adjohoun spécialisés dans le Palmier à huile ou cultures pluviales Pas de téléphone ou téléphone basique uniquement. Aucun accès internet. Une solution numérique 'générique' ne pourrait correspondre à tous. Elle doit être adaptée en fonction des profils des agriculteurs cibles.
+
+```{r, echo=FALSE}
+knitr::include_graphics("/cloud/project/Graphe C3.png")
+
+```
+
+Néamoins, il importe de souligner que le principal obstacle (Graphe C4 ) au numérique est la langue qui crée une incompréhension des solutions proposées.
+
+```{r, echo=FALSE}
+knitr::include_graphics("/cloud/project/Graphe C4.png")
+
+```
+
+
+Les obstacles, peu importe la culture frappent tout le monde avec la même intensité relative (Graphe C5). Il n'y a pas une filière plus favorisée qu'une autre.
+Puisque  les obstacles sont assez homogènes, la différence se jouera sur l'adéquation entre le profil social et la solution préférée. En somme, ces résultats indiquent que la simple disponibilité d’une solution numérique ne garantit ni son accès réel ni son adoption durable. L’utilisation effective dépend plutôt d’un ensemble de facteurs infrastructurels, cognitifs et socio-économiques qui conditionnent la capacité des producteurs à intégrer l’innovation dans leurs pratiques. L’hypothèse 3 est ainsi confirmée : l’accès et l’adoption des outils numériques relèvent davantage des conditions structurelles et sociales que de leur seule existence technique.
+
+```{r, echo=FALSE}
+knitr::include_graphics("/cloud/project/Graphe C5.png")
+
+```
+
+**0S4 : Hiérarchiser les besoins des producteurs en matière de plateforme numérique**
+Les résultats montrent que les producteurs accordent une importance prioritaire à la fiabilité et à la disponibilité continue de l’information climatique, celle-ci étant perçue comme un outil direct de gestion du risque agricole. Par ailleurs, les producteurs préfèrent des canaux simples tels que les SMS ou les services USSD, compatibles avec des téléphones basiques et des réseaux faibles et les applications mobiles fonctionnels hors ligne.
+Les données révèlent également que les producteurs expriment un besoin d’information claire, compréhensible, adaptée aux langues locales et, si possible, appuyée par un relais humain de proximité (Tableau D1).
+
+```{r, echo=FALSE}
+information_liste <- c("Prévisions météorologiques localisées", "Alertes  précoces (sècheresse, inondation, ravageurs )", "Conseils techniques de  production", "Gestion de l'irrigation et de l'eau", "Accès au crédit ou à l' assurance agricole")
+reception_liste <- c("SMS", "Message vocaux", "Application mobile", "Site web", "Réseaux sociaux", "Radio locale")
+langue_liste <- c("Francais", "Images/Pictogrammes", "Audio", "Langues locales")
+fonctionalite_liste <- c("D'enregistrer  vos données de culture (dates, rendements,  superficies)", "D'échanger avec d'autres producteurs", "D' accéder à des formations ou tutoriels en ligne", "De signaler des problèmes ( maladies, manque d'eau etc...)", "D' obtenir des conseils personnalisés")
+gestion_liste <- c("Coopérative/groupement", "ONG", "Ministère de l'Agriculture", "Recherche", "Entreprise privée")
+
+counts_information <- sapply(information_liste, function(x) { sum(grepl(x, simulation$informations_souhaitee_recevoir, ignore.case = TRUE)) })
+counts_reception <- sapply(reception_liste, function(x) { sum(grepl(x, simulation$forme_reception_préfere, ignore.case = TRUE)) })
+counts_langue <- sapply(langue_liste, function(x) { sum(grepl(x, simulation$langues_adaptes, ignore.case = TRUE)) })
+counts_fonctionalite <- sapply(fonctionalite_liste, function(x) { sum(grepl(x, simulation$fonctionalite_application, ignore.case = TRUE)) })
+counts_gestion <- sapply(gestion_liste, function(x) { sum(grepl(x, simulation$gestionnaire, ignore.case = TRUE)) })
+
+df_information <- data.frame(Information = information_liste, Nombre = counts_information)
+df_reception <- data.frame(Reception = reception_liste, Nombre = counts_reception)
+df_langue <- data.frame(Langue = langue_liste, Nombre = counts_langue)
+df_fonctionalite <- data.frame(Fonctionalite = fonctionalite_liste, Nombre = counts_fonctionalite)
+df_gestion <- data.frame(Gestion = gestion_liste, Nombre = counts_gestion)
+print(df_reception)
+print(df_langue)
+print(df_gestion)
+summary(simulation$Langue_locale_majoritaire)
+```
+
+Ces éléments indiquent que la préférence ne porte pas exclusivement sur le caractère « basique » de la solution, mais sur sa capacité à combiner accessibilité, compréhension et interaction.
+Ainsi, l’hypothèse selon laquelle les producteurs privilégient systématiquement uneplateforme basique accessible à 100 % est rejetée. Les résultats suggèrent plutôt qu’une approche hybride( Tableau D2), intégrant accessibilité technique et qualité fonctionnelle, constitue le modèle le plus pertinent pour répondre durablement aux besoins des agriculteurs.
+```{r, echo=FALSE}
+solution_ideale <- data.frame(
+  Categorie = c("Information prioritaire", "Canal de réception", "Langue préférée", "Fonctionnalité clé", "Gestionnaire de confiance"),
+  Choix_Majoritaire = c(
+    df_information$Information[which.max(df_information$Nombre)],
+    df_reception$Reception[which.max(df_reception$Nombre)],
+    df_langue$Langue[which.max(df_langue$Nombre)],
+    df_fonctionalite$Fonctionalite[which.max(df_fonctionalite$Nombre)],
+    df_gestion$Gestion[which.max(df_gestion$Nombre)]
+  ))
+
+print(solution_ideale)
+```
+
+
+# Références
+
+
+
+
