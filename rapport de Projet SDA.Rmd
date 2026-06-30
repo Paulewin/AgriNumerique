@@ -2,7 +2,7 @@
 title: "Amélioration de la résilience des producteurs agricoles face au changement climatique au Bénin"
 author:  DENAKPO Paule, DEDEGBE Bonifacia, DIMON Elodie, BOURAIMA Oulfath, AZONGNIDE Glwadys
 date: "`r Sys.Date()`"
-bibliography: Reference.bib
+bibliography: References.bib
 biblio-style: APA
 citation_package: biblatex
 output: 
@@ -19,7 +19,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 
 # Contexte et justification 
-Au Bénin, le changement climatique transforme profondément l’agriculture à tavers divers phénomènes comme: l'irrégularité des pluies,  les sécheresses fréquentes et bien d'autres @sodjinou2019. Ces derniers  perturbent la production et réduisent  considérablement les rendements (Aho et al). Cependant, tous les producteurs ne sont pas affectés de la même manière. Certains démontrent une capacité d’adaptation qui leur permet de limiter les pertes, tandis que d’autres restent fortement vulnérables @amegnaglo, 2016). Cette variabilité suggère que plusieurs facteurs peuvent  influencer la résilience des exploitations. Identifier et comprendre ces déterminants nous permettra  non seulement de  concevoir des stratégies mais aussi de trouver des solutions fondées sur des données probantes afin d’améliorer durablement la résilience des producteurs agricoles et renforcer la sécurité alimentaire au Bénin, ainsi que les conditions de vie de ces exploittions.
+Au Bénin, le changement climatique transforme profondément l’agriculture à tavers divers phénomènes comme: l'irrégularité des pluies,  les sécheresses fréquentes et bien d'autres . Ces derniers de par leurs manifestations, ont des répercussions sur les moyens d’existence des ménages, en particulier sur leurs activités agricoles en perturbant la production et réduisant  considérablement les rendements. Cette baisse de rendement et/ou perte de production entrainent au niveau des producteurs des situations d’insécurité alimentaire source de sous-alimentation et de mauvaise qualité des aliments [@sodjinouImpactChangementsClimatiques2019]. Cependant, tous les producteurs ne sont pas affectés de la même manière. Certains démontrent une capacité d’adaptation qui leur permet de limiter les pertes, tandis que d’autres restent fortement vulnérables [@takpaPerceptionProducteursChangements2022]. Cette variabilité suggère que plusieurs facteurs peuvent  influencer la résilience des exploitations. Identifier et comprendre ces déterminants nous permettra  non seulement de  concevoir des stratégies mais aussi de trouver des solutions fondées sur des données probantes afin d’améliorer durablement la résilience des producteurs agricoles et renforcer la sécurité alimentaire au Bénin, ainsi que les conditions de vie de ces exploittions.
 
 # Bref résumé du projet 
  Ce projet a pour but  de développer une solution numérique innovante pour aider les producteurs à anticiper les risques liés aux aléas climatiques et à adopter des pratiques agricoles adaptées. En sécurisant la production, cet outil améliorera la disponibilité et l’accès à la nourriture pour les communautés rurales et renforcera leur capacité à faire face aux changements  climatiques. Ce projet vise à renforcer durablement la résilience des producteurs agricoles au Bénin par une une combinaison de la technologie et des connaissances scientifiques.
@@ -339,6 +339,36 @@ solution_ideale <- data.frame(
 
 print(solution_ideale)
 ```
+# Conclusion
+En définitive, la solution numérique la solution numérique sera une application mobile fonctionnelle sans internet. Elle fournira principalement des conseils techniques de production en français et en Goun et permettra d'échanger avec d'autres agriculteurs
+# Difficultés rencontrées
+
+Les difficultés ci après ont  été rencontrées dans le cadre de la réalisation de ce travail:
+
+* *Ressources financières et matérielles limitées pour une collecte élargie sur le terrain*
+
+* *Enquête réalisée principalement auprès de producteurs proches disposant d’un smartphone, necessitant la maîtrise de l'usage d'un smart phone*
+
+* *Nombre de réponses insuffisantes au départ pour des analyses approfondies*
+
+* *Problèmes de coordination liés aux disponibilités des membres du groupe*
+
+* *Coupures d’électricité et connexion internet instable*
+
+* *Difficultés techniques lors du transfert des fichiers de RStudio vers le GitHub commun*
+
+
+# Solutions apportées
+
+Pour surmonter les difficultés nous avons procédé comme suit:
+
+* *Simulation de données à partir des réponses collectées afin de compléter l’échantillon*
+
+* *Organisation de séances de travail en soirée pour harmoniser la coordination*
+
+* *Multiplication des échanges techniques pour résoudre les problèmes de synchronisation entre RStudio et GitHub*
+
+* *Répartition plus claire des tâches pour optimiser le temps disponible*
 
 
 # Références
