@@ -325,7 +325,7 @@ summary(simulation[, 22:23])
 ```
 
 
-Le test de Fisher révèle de relation statistiquement significative entre la possession d'un téléphone  et le type de culture pratiqué (p =  0.01594) d'une part, et entre l'accès à internet et la commune (p =  0.2238) d'autre part.   
+Le test de Fisher révèle de relation statistiquement significative entre la possession d'un téléphone  et le type de culture pratiqué (p =  0.0402). Entre l'accès à internet et la commune il n'y a pas de relation significative.    
 \newpage
 
 ```{r, echo=FALSE}
@@ -392,7 +392,7 @@ Néamoins, il importe de souligner que le principal obstacle (Graphe C4 ) au num
 
 
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, out.width="80%", fig.align="center"}
 knitr::include_graphics("D:/projet_sda/ProjetSDA/GrapheCAP C4.PNG")
 
 ```
@@ -402,7 +402,7 @@ Les obstacles, peu importe la culture frappent tout le monde avec la même inten
 Puisque  les obstacles sont assez homogènes, la différence se jouera sur l'adéquation entre le profil social et la solution préférée. En somme, ces résultats indiquent que la simple disponibilité d’une solution numérique ne garantit ni son accès réel ni son adoption durable. L’utilisation effective dépend plutôt d’un ensemble de facteurs infrastructurels, cognitifs et socio-économiques qui conditionnent la capacité des producteurs à intégrer l’innovation dans leurs pratiques. L’hypothèse 3 est ainsi confirmée : l’accès et l’adoption des outils numériques relèvent davantage des conditions structurelles et sociales que de leur seule existence technique.
 
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, out.width="80%", fig.align="center"}
 knitr::include_graphics("D:/projet_sda/ProjetSDA/GrapheCAP C5.PNG")
 
 ```
