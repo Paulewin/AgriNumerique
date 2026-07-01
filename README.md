@@ -4,10 +4,10 @@
 
 ## Présentation du Projet
 Ce dépôt contient les travaux de recherche et de développement menés dans le cadre du travail de recherche de fin de formation en sciences de données. Le but visé est l'amérioration de la résilience des producteurs face au changement climatique. Le projet s'articule autour de deux grands axes :
-1. **Analyses Statistiques 
-2. **Développement du MVP
+1. Analyses Statistiques 
+2. Développement du MVP
    
-## 📊 Démarche Scientifique & Objectifs Spécifiques
+##  Démarche Scientifique & Objectifs Spécifiques
 
 Le design de cette solution numérique repose sur une phase de simulation et d'analyse de données quantitatives et qualitatives  autour de trois objectifs spécifiques fondamentaux. Ce travail statistique a permis de cartographier précisément la demande et les freins des producteurs.
 
@@ -28,9 +28,9 @@ d’adaptation plus élevés que ceux du primaire ou sans instruction.
 - **Objectif :** Évaluer l'intérêt des producteurs pour l'intégration des technologies dans leur quotidien et définir le type d'outils qu'ils réclament.
 - **Résultat statistique :** Une forte demande émerge pour une application qui fournit les conseils techniques de production en langue locale, perçus comme des leviers prioritaires face au changement climatique.
 
----
 
-## 💡 Du Besoin Terrain à la Solution Numérique (MVP)
+
+##  Du Besoin Terrain à la Solution Numérique (MVP)
 
 Les conclusions de nos analyses statistiques R  ont directement dicté le cahier des charges et l'architecture de notre **Minimum Viable Product (MVP)** :
 
@@ -42,11 +42,11 @@ Les conclusions de nos analyses statistiques R  ont directement dicté le cahier
 
 
 ##  Fonctionnalités du MVP
-- **Prédire les périodes favorables de semis ;
-- **Fournir des calendriers agricoles adaptés aux différentes zones ;
-- **Recommander les semences les mieux adaptées aux conditions climatiques ;
-- **Mettre les producteurs en relation avec des experts agricoles ;
-- **Diffuser des conseils techniques dans les langues locales.
+- Prédire les périodes favorables de semis ;
+- Fournir des calendriers agricoles adaptés aux différentes zones ;
+- Recommander les semences les mieux adaptées aux conditions climatiques ;
+- Mettre les producteurs en relation avec des experts agricoles ;
+- Diffuser des conseils techniques dans les langues locales.
 
 ## Structure du Repo
 L'ensemble du code de nettoyage, simulation et traitement des données se trouve dans le dossier `/scripts`.
@@ -54,14 +54,39 @@ Les bases de données sont dans le dossier `/data`
 Le dossier `/report` contient les versions rmd et pdf du rapport d'analyse 
 Les niveaux de maturité technologiques et le MVP sont enregistrés dans le dossier app
 
-## 🛠️ Technologies utilisées
-- **Analyse de données :** R (FactoMineR, ggplot2, RMarkdown)
-- **Base de données :** PostgreSQL / 
-- **MVP :** MVP (Minimum Viable Product) : Architecture exécutée via le script run_app.R. Ce fichier fait office de point d'entrée unique : il configure le serveur R Shiny
-- - **Modèles utilisés :** `FactoMineR::MCA` pour l'Analyse des Correspondances Multiples.
-- **Visualisations :** Intégrées au rapport final (générées via `ggplot2` et `factoextra`).
+##  Technologies utilisées pour le MVP
+ L'architecture est exécutée via le script run_app.R. Ce fichier fait office de point d'entrée unique : il configure le serveur R Shiny.
 
 
-## 👥 Auteurs
-- **[Votre Nom]** - *Analyses & Conception* - [Votre Lien LinkedIn]
-- **[Nom du collaborateur]** - *Développement & Intégration*
+### Packages R Prérequis 
+
+Pour exécuter le MVP (`run_app.R`) et générer automatiquement les rapports d'analyses au format PDF, copiez et lancez cette commande unique dans votre console RStudio :
+
+```R
+install.packages(c(
+  # --- Infrastructure MVP ---
+  "shiny", 
+  
+  # --- Analyses Statistiques & Données ---
+  "FactoMineR",   # Pour l'Analyse des Correspondances Multiples (ACM)
+  "factoextra",   # Pour la visualisation des cartes factorielles
+  "dplyr",        # Pour la manipulation et le nettoyage des données d'enquête
+  "readr",        # Pour l'importation rapide des fichiers de données (.csv)
+  
+  # --- Visualisation & Rapports ---
+  "ggplot2",      # Pour les graphiques descriptifs personnalisés
+  "gtsummary",    # Pour générer de magnifiques tableaux socio-démographiques pros
+  "rmarkdown",    # Pour la structure textuelle du rapport final
+  "knitr",        # Pour la compilation dynamique du code dans le rapport
+  "tinytex"       # Moteur LaTeX léger indispensable pour exporter en PDF
+))
+
+# CRUCIAL : Après l'installation, exécutez cette ligne une seule fois 
+# pour finaliser l'installation des outils PDF en tâche de fond :
+tinytex::install_tinytex()
+```
+
+##  Auteures
+- **Paule DENAKPO** - *Analyses & Conception* - 
+- **Bonifacia DEDEGBE** - *Développement & Intégration*
+- **Oul'fath BOURAÏMA** - *Analyses* 
