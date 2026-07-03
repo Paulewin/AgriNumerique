@@ -90,3 +90,6 @@ tinytex::install_tinytex()
 - **Paule DENAKPO** - *Analyses & Conception* - 
 - **Bonifacia DEDEGBE** - *Développement & Intégration*
 - **Oul'fath BOURAÏMA** - *Analyses* 
+##Application en ligne
+Lien de l'application:
+https://6ngdmj-bonifacia-dedegbe.shinyapps.io/AgriNumerique/
