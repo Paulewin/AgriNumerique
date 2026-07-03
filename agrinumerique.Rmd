@@ -904,9 +904,9 @@ head(coef_df )
 introduisons un standard d'erreur
 ```{r}
 coef_df$se <- summary(modele)$coefficients[, "Std. Error"]
-
+names(coef(modele))[-1]
 ```
-Visualisons les coefficients avec ggplot2 
+Visualisons les coefficients avec ggplot2
 ```{r}
 library(ggplot2)
 library(viridis)

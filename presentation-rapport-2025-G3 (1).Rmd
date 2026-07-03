@@ -1,0 +1,40 @@
+---
+title: "Amélioration de la résilience des producteurs agricoles face au changement climatique au Bénin"
+author: DENAKPO Paule, DEDEGBE Bonifacia, DIMON Elodie, BOURAÏMA Oulfath, AZONGNIDE
+  Gwaldys
+date: "`r Sys.Date()`"
+output: powerpoint_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Plan
+
+- Introduction
+- Problematique
+- Objectifs
+_ Méthodologie
+- Résultats
+- Perspectives
+
+## Introduction
+
+- Bullet 1
+- Bullet 2
+- Bullet 3
+
+## Problematique
+
+```{r cars, echo = TRUE}
+summary(cars)
+```
+
+## Objectifs
+
+```{r pressure}
+plot(pressure)
+```
+
+## Objectifs
