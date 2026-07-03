@@ -86,9 +86,13 @@ install.packages(c(
 tinytex::install_tinytex()
 ```
 
-##Application en ligne
+## Application en ligne
 
 https://6ngdmj-bonifacia-dedegbe.shinyapps.io/AgriNumerique/
+
+## Vidéo de présentation de l'application
+
+https://canva.link/ceo60i3zgt971w1
 
 ##  Auteures
 - **Paule DENAKPO** - *Analyses & Conception* - 
