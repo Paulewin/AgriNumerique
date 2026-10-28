@@ -9,6 +9,7 @@
 library(shiny)
 library(bslib)
 library(jsonlite)
+library(shinyWidgets)
 
 # ============================================================
 # SECTION 1 — PALETTE OFFICIELLE (un seul endroit à modifier)
@@ -87,8 +88,25 @@ ITINERAIRES <- list(
   # mais   = data.frame(...)
   # soja   = data.frame(...)
 )
-
 CULTURES_DISPONIBLES <- c("Tomate" = "tomate")
+
+VARIETE <- c(
+  "Tomate Mona" = "mona",
+  "Tomate Cobra 34" = "cobra 34",
+  "Tomate F1 JADE" = "f1 jade",
+  "Tomate Thorgal" = "thorgal",
+  "Tomate F1 Mongal" = "f1 mongal",
+  "Tomate F1 Kiara" = "f1 kiara"
+  )
+
+# Liste des images correspondantes placées dans le dossier www
+images_fichiers <- c("MONA.jpg", "COBRA_34.jpg", "F1_JADE.jpg", "THORGAL.jpg", "F1_MONGAL.jpg", "F1_KIARA.jpg") 
+
+html_options <- paste0(
+  "<img src='", images_fichiers, "' width='25' height='25' style='margin-right: 10px; vertical-align: middle;'> ",
+  names(VARIETE)
+)
+
 
 # ============================================================
 # SECTION 4 — UTILITAIRES
@@ -730,6 +748,17 @@ server <- function(input, output, session) {
                   selectInput("culture","Culture pratiquée",
                               choices=CULTURES_DISPONIBLES, width="100%"),
                   textInput("variete","Variété (optionnel)",
+                  pickerInput(
+                    inputId = "variete",
+                    label = "Variété (optionnel) :",
+                    choices = VARIETE,
+                    choicesOpt = list(
+                      content = html_options
+                    ),
+                    options = pickerOptions(
+                      liveSearch = FALSE
+                    )
+                  ),
                             placeholder="Ex : Mongal F1", width="100%"),
                   radioButtons("semis","Avez-vous déjà semé ?",
                                choices=c("Oui"="oui","Non"="non"), selected="non"),
