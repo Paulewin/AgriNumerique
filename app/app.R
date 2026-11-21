@@ -929,7 +929,7 @@ server <- function(input, output, session) {
                                       tags$span(class="meteo-item-lbl","Max demain")),
                                   div(class="meteo-item",
                                       tags$span(class="meteo-item-val",
-                                                if(!is.na(meteo$etp_j1)&&!is.null(meteo$etp_j1))paste0(meteo$etp_j1,"mm")else"\u2014"),
+                                                if (!is.null(meteo$etp_j1) && !is.na(meteo$etp_j1)) paste0(meteo$etp_j1, "mm") else "—"
                                       tags$span(class="meteo-item-lbl","ETP j+1"))
                               )
                             },
@@ -954,12 +954,12 @@ server <- function(input, output, session) {
                                    div(class="carte-sm",
                                        tags$table(class="profil-table",tags$tbody(
                                          tags$tr(tags$td("Nom"),       tags$td(nom_aff)),
-                                         tags$tr(tags$td("T\u00e9l\u00e9phone"), tags$td(if(nzchar(input$telephone%||%""))input$telephone else"\u2014")),
+                                         tags$tr(tags$td("Téléphone"), tags$td(ifelse(!is.null(input$telephone) && nzchar(input$telephone), input$telephone, "—"))),
                                          tags$tr(tags$td("Localit\u00e9"), tags$td(loc_aff)),
-                                         tags$tr(tags$td("Culture"),   tags$td("Tomate")),
-                                         tags$tr(tags$td("Vari\u00e9t\u00e9"), tags$td(if(nzchar(input$variete%||%""))input$variete else"\u2014")),
-                                         tags$tr(tags$td("Semis le"),  tags$td(format_date_fr(semis_date))),
-                                         tags$tr(tags$td("Superficie"),tags$td(paste0(input$superficie%||%"\u2014"," ha")))
+                                         tags$tr(tags$td("Culture"), tags$td("Tomate")),
+                                         tags$tr(tags$td("Variété"), tags$td(ifelse(is.null(input$variete) || input$variete == "", "—", input$variete))),
+                                         tags$tr(tags$td("Semis le"), tags$td(format_date_fr(semis_date))),
+                                         tags$tr(tags$td("Superficie"), tags$td(paste0(input$superficie%||%"\u2014"," ha")))
                                        ))
                                    ),
                                    br(),
@@ -1002,7 +1002,11 @@ server <- function(input, output, session) {
       )
     } # fin dashboard
   }) # fin renderUI
-} # fin server
+  server <- function(input, output, session)() {
+  
+  }
+  
+  shinyApp(ui, server)
 
 # ============================================================
 # LANCEMENT
