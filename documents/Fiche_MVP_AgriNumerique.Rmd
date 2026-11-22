@@ -1,0 +1,165 @@
+---
+title: "AgriNumérique — Définition du Produit Minimum Viable (MVP)"
+subtitle: "Fiche de Cadrage & Validation du MVP"
+author: 
+- "Paule DENAKPO et Bonifacia DEDEGBE"
+- "Deuxième année cohorte 3 Groupe 03"
+date: "15 Novembre 2026"
+output:
+  pdf_document: 
+    toc: true
+    latex_engine: xelatex
+    number_sections: true
+  word_document: 
+    toc: true
+  html_document: 
+    toc: true
+    number_sections: true
+---
+
+```{r, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("/cloud/project/documents/logo.jpg")
+```
+
+\newpage
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Utilisateur cible & problème prioritaire
+
+**Utilisateur cible (Early Adopter) :**
+
+Les producteurs agricoles au Bénin, principalement les producteurs de tomate, confrontés aux aléas climatiques et aux difficultés de planification des cultures.
+
+**Problème principal à résoudre :**
+
+Les producteurs agricoles ont du mal à anticiper les changements climatiques et leurs effets sur les cultures.
+
+D'après les études antérieures, on dénombre 95 % des producteurs qui ressentent ces impacts. On a constaté que les informations climatiques restent peu accessibles, peu adaptées à leurs localités et difficiles à utiliser.
+
+Les barrières linguistiques, le faible accès à Internet (35 %) et le manque de maîtrise du numérique sont autant de paramètres qui aggravent le problème.
+
+**Solution actuelle de l'utilisateur :**
+
+Développer AgriNumérique, une application numérique d'aide à la décision agricole qui fournit des informations météorologiques géolocalisées, des alertes climatiques et des recommandations agronomiques adaptées aux cultures et aux conditions locales. Elle permet aux producteurs de mieux planifier leur calendrier cultural, de suivre les stades de développement des cultures et d'anticiper les risques climatiques.
+
+# Proposition
+
+Pour les producteurs agricoles béninois, confrontés aux pertes liées aux aléas climatiques, AgriNumérique est une application d'aide à la décision qui fournit des informations météorologiques géolocalisées et des recommandations agronomiques adaptées à leurs cultures. Elle leur permet d'anticiper les risques, de réduire les pertes et d'augmenter ainsi leurs revenus, contribuant donc à l'essor économique local, à l'économie nationale et à la sécurité alimentaire.
+
+# Périmètre fonctionnel du MVP
+
+| Catégorie de périmètre | Éléments retenus |
+|---|---|
+| **A. Fonctionnalités indispensables** : sélection de la langue ; identification du producteur ; choix de la culture et date de semis ; calendrier cultural personnalisé ; alerte météo et recommandation associée | 1. Langue français<br>2. Nom, prénom, sexe<br>3. Choix de la culture : maïs, tomate, piment<br>4. Pluie, prévention des risques climatiques et température |
+| **B. Reportées aux versions V1 / V2** : langues locales ; fiche de variété ; géolocalisation ; mode hors ligne ; alertes par SMS ; assistant IA ou agents IA | • Autres langues : fon, goun, bariba, dendi<br>• Nom de la variété + image, fiche technique de culture de chaque variété<br>• Localisation des parcelles |
+| **C. Reportées aux versions V3 / V4** : diagnostic des maladies ; analyses des sols ; télédétection ; irrigation intelligente ; gestion post-récolte ; prévisions des rendements | • Identification des maladies et ravageurs à partir de photos des cultures grâce à l'IA<br>• Recommandations sur la fertilité, le pH et les besoins en fertilisation<br>• Utilisation d'images satellitaires pour suivre l'état des cultures<br>• Conseils sur les besoins en eau selon la culture et les conditions climatiques<br>• Conseils de stockage, de conservation et de réduction des pertes<br>• Estimation des rendements à partir des données agronomiques et climatiques |
+
+# Format du MVP & parcours utilisateur minimal
+
+## Prototypage
+
+**Développement agile :**
+
+Le prototype a été construit directement à partir des besoins hiérarchisés dans l'étude de 2025, avec une stack légère permettant un déploiement rapide et testable en continu :
+
+- **Application** : R / Shiny
+- **Déploiement** : shinyapps.io (accès en ligne immédiat, sans installation)
+- **Données météo** : API Open-Meteo
+- **Accès au prototype** : <https://6ngdmj-bonifacia-dedegbe.shinyapps.io/AgriNumerique/>
+
+**Parcours utilisateurs implémenté :**
+
+- **Démarrage** : choix de la langue, création du compte.
+- **Informations sur la culture** : saisie de la culture pratiquée, variété (optionnelle), date de semis.
+- **Calendrier cultural intelligent** : génération automatique d'un calendrier complet, avec rappels des actions à réaliser.
+- **Alertes météo et recommandations** : suivi quotidien et conseils spécifiques en cas de risque.
+
+La démarche suivie pour construire le prototype a été **agile et itérative** (cycles courts de développement et d'ajustement).
+
+# Validation des utilisateurs
+
+**Test utilisateurs :**
+
+Le prototype a été testé en interne par les agronomes de l'équipe (validation de la pertinence agronomique du contenu : calendrier cultural, recommandations). Nous tenons à préciser qu'**aucun test n'a encore été mené auprès de producteurs réels sur le terrain.**
+
+Un pilote terrain est planifié pour la validation, avec un calendrier cible contraint par l'objectif d'atteindre le TRL 9 (cf. document TRL) au plus tard en septembre 2027 :
+
+| Période | Étape de validation |
+|---|---|
+| Déc. 2026 – Jan. 2027 | Préparation du pilote (protocole de test, recrutement de producteurs partenaires) |
+| Fév. 2027 – Avr. 2027 | Pilote terrain auprès de producteurs réels au Bénin |
+| Mai 2027 – Jul. 2027 | Itération sur retours utilisateurs (langues locales, SMS, hors ligne, fiches variétés) |
+| Août 2027 – Sept. 2027 | Déploiement étendu et validation en conditions réelles |
+
+Cibles de validation proposées :
+
+- Taux d'adoption ≥ 70 % des producteurs invités au pilote
+- Taux de rétention ≥ 50 % à 1 mois, ≥ 30 % sur une saison complète
+- Taux de satisfaction déclaré ≥ 70 %
+
+Ci-dessous, la feuille de route schématisant les phases d'évolution du projet :
+
+```{r, echo=FALSE, feuille-de-route, out.width="90%"}
+knitr::include_graphics("/cloud/project/documents/image1.png")
+```
+
+*Feuille de route qui tient compte des 5 phases d'évolution du projet.*
+
+Le prototype actuel correspond à la phase « **Aujourd'hui** » de cette feuille de route.
+
+# Plan de test et d'amélioration du MVP
+
+## Méthodologie de test
+
+Trois approches complémentaires sont prévues pour évaluer le MVP lors du pilote :
+
+1. **Tests A/B** : une population d'utilisateurs est divisée aléatoirement en deux groupes, chacun expérimentant une variante différente du produit (ex. formulation des alertes, fréquence des notifications), afin de comparer leurs effets sur le comportement des producteurs.
+2. **Questionnaire en ligne** : plutôt que des entretiens individuels, le volet qualitatif sera mené via un questionnaire en ligne envoyé aux producteurs de tomate échantillonnés, pour comprendre leur vécu et les besoins non couverts.
+3. **Analyses quantitatives** : suivi des indicateurs d'usage (voir *Collecte de données* ci-dessous) sur l'ensemble des utilisateurs du pilote.
+
+## Collecte de données
+
+Les performances des différentes versions testées seraient mesurées à l'aide d'indicateurs clés de performance (KPI), en cohérence avec les cibles déjà proposées :
+
+1. Taux de conversion (création de compte après invitation au pilote)
+2. Taux de rétention (utilisateurs actifs à 1 mois, sur 1 saison)
+3. Taux de satisfaction déclaré (questionnaire en ligne et enquête post-pilote)
+4. Taux d'action après alerte (alertes consultées suivies d'une action rapportée)
+
+## Taille d'échantillon
+
+**Pour le test A/B**, nous allons comparer deux variantes du produit sur un KPI comme le taux d'adoption. La formule standard de comparaison de deux proportions, avec un risque α = 5 % et une puissance 1−β = 80 %, est :
+
+$$n_{par\ groupe} = \frac{(Z_{\alpha/2} + Z_\beta)^2 \times [p_1(1-p_1) + p_2(1-p_2)]}{(p_1-p_2)^2}$$
+
+- **Z~α/2~** : le seuil critique lié au risque d'erreur de type I (α), c'est-à-dire la probabilité de conclure à une différence qui n'existe pas en réalité (faux positif). Pour un risque α = 5 %, Z~α/2~ = 1,96.
+- **Z~β~** : le seuil critique lié à la puissance statistique du test (1−β), c'est-à-dire la probabilité de détecter une vraie différence quand elle existe réellement. Pour une puissance de 80 %, Z~β~ = 0,84.
+- **p1** : la proportion observée ou attendue dans le groupe de référence.
+- **p2** : la proportion attendue dans le groupe testé avec la variante.
+- **p1(1−p1)** et **p2(1−p2)** : la variance de chaque proportion.
+- **(p1−p2)²** : l'écart au carré entre les deux proportions.
+
+Le tableau ci dessous donne la taille d'échantillon par groupe selon l'écart à détecter
+
+| Écart à détecter (points) | p1 (référence) | p2 (variante) | Taille d'échantillon par groupe | Total (2 groupes) |
+|---|---|---|---|---|
+| 10 points | 50 % | 60 % | ≈ 385 | ≈ 770 |
+| 15 points | 50 % | 65 % | ≈ 167 | ≈ 334 |
+| 20 points | 50 % | 70 % | ≈ 91 | ≈ 182 |
+| 25 points | 50 % | 75 % | ≈ 55 | ≈ 110 |
+| 30 points | 50 % | 80 % | ≈ 36 | ≈ 72 |
+
+**Pour le questionnaire en ligne**, nous allons estimer une proportion, comme le taux de satisfaction, avec une marge d'erreur donnée :
+
+$$n = \frac{Z^2 \times p(1-p)}{e^2}$$
+
+Avec Z = 1,96 (confiance 95 %), p = 0,5 (hypothèse la plus prudente, qui maximise la taille requise) et *e* la marge d'erreur souhaitée :
+
+| Marge d'erreur souhaitée | Taille d'échantillon |
+|---|---|
+| ± 5 % | ≈ 384 répondants |
+| ± 8 % | ≈ 150 répondants |
+| ± 10 % | ≈ 96 répondants |
