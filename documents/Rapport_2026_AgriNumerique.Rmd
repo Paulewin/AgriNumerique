@@ -1,0 +1,146 @@
+---
+title: "Rapport 2026 du Projet AgriNumérique"
+subtitle: "Projet: AgriNumérique"
+author: 
+- "Paule DENAKPO et Bonifacia DEDEGBE"
+- "Deuxième année Cohorte 3 Groupe 03"
+date: "15 novembre 2026"
+output:
+  pdf_document: 
+    toc: true
+    latex_engine: xelatex
+    number_sections: true
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: false
+---
+
+```{r echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("/cloud/project/documents/logo.jpg")
+```
+
+\newpage
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Ce rapport documente la suite donnée en 2026 à l'étude socio-économique de l'année dernière sur la résilience climatique des producteurs béninois, à travers le développement du prototype AgriNumérique.
+
+# 1. Contexte et justification
+
+L'année dernière, une étude socio-économique a été menée auprès des producteurs agricoles béninois pour comprendre l'impact du changement climatique sur leur production et leurs besoins en solutions numériques. Les résultats ont montré que :
+
+- 95 % des producteurs perçoivent les effets du changement climatique sur leur production.
+- 94 % possèdent un téléphone mobile, mais seulement 35 % ont accès à Internet.
+- La langue et la compréhension constituent le principal obstacle à l'adoption du numérique.
+- Les producteurs expriment une forte demande pour des solutions simples et accessibles, malgré une faible capacité d'adaptation actuelle.
+
+Ces résultats ont directement guidé la conception d'un prototype applicatif, **AgriNumérique**, une plateforme intelligente d'aide à la décision agricole visant à renforcer la résilience des producteurs face au changement climatique.
+
+Cette année, il est demandé de produire un rapport suivant la même structure que celui de l'an dernier. Aucune nouvelle collecte de données de terrain n'a cependant été engagée à ce jour : le travail de cette année porte sur la construction du MVP (Minimum Viable Product) à partir des résultats de l'étude précédente, ainsi que sur trois documents complémentaires (MVP, PRD, TRL) destinés à formaliser cette phase.
+
+# 2. Bref résumé du projet
+
+AgriNumérique est une plateforme numérique d'aide à la décision agricole conçue pour renforcer la résilience des producteurs béninois face aux aléas climatiques (sécheresses, irrégularité des pluies, inondations, hausse des températures). L'application propose :
+
+- un calendrier cultural personnalisé, généré à partir de la culture et de la date de semis renseignées par le producteur ;
+- des alertes météo en temps réel et des conseils de protection des cultures ;
+- une interface simple, multilingue (tenant compte des langues locales), pensée pour des utilisateurs à faible littératie numérique et à accès Internet limité.
+
+Cette année, le projet est passé de la phase d'étude à la phase de **prototypage** : un MVP fonctionnel a été développé et est accessible en ligne. Il constitue la base des trois documents de cadrage produits en parallèle de ce rapport : le document MVP, le PRD et l'évaluation TRL.
+
+```{r, echo=FALSE, infographie, out.width="80%", fig.align="center"}
+knitr::include_graphics("/cloud/project/documents/image2.png")
+```
+
+*Infographie de présentation de la plateforme AgriNumérique (problématique, résultats de l'étude, fonctionnalités, parcours utilisateur, feuille de route) *
+
+# 3. Objectif du projet
+
+## 3.1 Objectif général
+
+Contribuer à la résilience des producteurs béninois face au changement climatique en mettant à leur disposition un prototype numérique fonctionnel, issu directement des besoins identifiés par l'étude de l'an dernier.
+
+## 3.2 Objectifs spécifiques (OS)
+
+- **OS1** : Traduire les besoins prioritaires identifiés (alertes climatiques localisées, calendrier cultural, interface simple et en langues locales) en fonctionnalités concrètes.
+- **OS2** : Développer un MVP accessible aux producteurs à faible connectivité et faible littératie numérique.
+- **OS3** : Évaluer la faisabilité technique et l'adéquation du prototype avec les contraintes de terrain (réseau, langue, simplicité).
+- **OS4** : Documenter le produit (PRD) et son niveau de maturité technologique (TRL) pour préparer les phases suivantes (test terrain, passage à l'échelle).
+
+## 3.3 Hypothèses
+
+- **H1** : Une plateforme simple et légère, accessible même hors ligne/avec peu de réseau, sera mieux adoptée qu'une solution sophistiquée mais moins accessible (conformément à H4 de l'étude de l'an dernier).
+- **H2** : La prise en compte des langues locales réduit l'obstacle à l'adoption identifié comme principal l'an dernier.
+- **H3** : Un calendrier cultural personnalisé et des alertes météo actionnables améliorent la planification des activités agricoles et réduisent les pertes de récolte.
+
+# 4. Méthodologie
+
+## 4.1 Conception et développement
+
+À partir des besoins hiérarchisés dans l'étude de l'an dernier (OS4), les fonctionnalités du prototype ont été définies puis développées selon une démarche **agile et itérative**, par cycles courts permettant de tester et d'ajuster le prototype progressivement.
+
+## 4.2 Outils et techniques
+
+Le prototype a été développé avec **R / Shiny** et déployé sur shinyapps.io (prototype accessible en ligne). Les données météo sont récupérées via l'API **Open-Meteo**. L'hébergement définitif de l'application est prévu sur le **serveur du programme de formation**.
+
+Pour la gestion des données, plutôt que des fichiers plats, le choix retenu est une base de données SQL légère : **SQLite**, un véritable moteur SQL sans serveur à installer ni administrer (la base est un simple fichier, nativement supporté par R via `RSQLite`/`DBI`), gratuit et sans coût d'hébergement supplémentaire. Ce choix couvre confortablement les volumes attendus pour le pilote et les premières phases de déploiement ; une migration vers un moteur serveur comme PostgreSQL ne serait à envisager qu'en cas de forte croissance du nombre d'utilisateurs simultanés (détails dans le document PRD, section 5).
+
+**Séparer code et données (priorité immédiate)** : le fichier de base ne se trouve pas dans le dépôt GitHub du projet (actuellement public) — ajout au `.gitignore`, fichier conservé uniquement sur le serveur de déploiement ; si des données réelles y ont déjà circulé, purge de l'historique Git (`git filter-repo` ou BFG Repo-Cleaner), une suppression simple ne suffisant pas.
+
+Pour la sécurité des données, en privilégiant des solutions simples, gratuites et faciles à déployer, les mesures retenues sont : fichier de base stocké hors du dossier public de l'application, connexion HTTPS (certificat gratuit Let's Encrypt), accès aux pages d'administration protégé par mot de passe (package R gratuit `shinymanager`), sauvegardes automatisées régulières, et minimisation/anonymisation des données producteurs avant toute analyse agrégée.
+
+## 4.3 Validation
+
+Le prototype a été testé en interne par les agronomes de l'équipe (validation de la pertinence agronomique du contenu). Aucun test de terrain, auprès de producteurs réels, n'a été réalisé.
+
+# 5. Résultats
+
+## 5.1 Fonctionnalités livrées
+
+```{r, echo=FALSE, fonctionnalites-livrees}
+fonctionnalites <- data.frame(
+  "Besoin identifié (étude 2025)" = c(
+    "Informations climatiques localisées et actionnables",
+    "Faible planification des activités agricoles",
+    "Faible littératie numérique",
+    "Langue / compréhension (principal obstacle)",
+    "Accès Internet limité (35 % seulement)",
+    "Demande de solutions pratiques et accessibles"
+  ),
+  "Fonctionnalité AgriNumérique" = c(
+    "Alertes météo en temps réel et conseils personnalisés",
+    "Calendrier cultural intelligent personnalisé",
+    "Interface simple, intuitive et facile à utiliser",
+    "Prise en compte des langues locales",
+    "Solution légère, adaptable (SMS / hors ligne à venir)",
+    "Recommandations claires à chaque étape de culture"
+  ),
+  check.names = FALSE
+)
+knitr::kable(fonctionnalites)
+```
+
+## 5.2 État actuel
+
+Le prototype fonctionnel (MVP) permet : choix de la langue, création de compte, saisie de la culture et de la date de semis, génération automatique d'un calendrier cultural, et réception d'alertes météo avec recommandations. Il est accessible en ligne (lien dans le document MVP).
+
+## 5.3 Retours terrain
+
+Aucune donnée de retour utilisateur chiffrée n'est disponible : seul un test interne par les agronomes de l'équipe a été mené (hors terrain), et aucun calendrier n'est encore défini pour un pilote auprès de producteurs réels.
+
+# 6. Difficultés rencontrées
+
+La principale difficulté rencontrée est liée au **niveau de connaissances de l'équipe en développement d'applications** (langages, architecture logicielle, bonnes pratiques) : l'étude de l'an dernier portait sur le volet socio-économique et n'avait pas couvert cet aspect technique.
+
+# 7. Solutions apportées
+
+Face à ce manque de compétences techniques, l'équipe s'est basée sur les cours de la formation en sciences de données SDA.
+
+L'équipe continuera à apprendre à développer une application en partant de ses connaissances actuelles pour monter progressivement en compétence sur le développement de l'application tout au long du projet.
+
+# 8. Conclusion
+
+Le passage de l'étude socio-économique de l'an dernier à un prototype fonctionnel (AgriNumérique) marque une étape concrète vers l'objectif général de renforcement de la résilience climatique des producteurs béninois. Les prochaines étapes identifiées sont les tests terrain et le pilotage au Bénin (court terme), l'ajout d'alertes SMS et de fonctionnalités hors ligne ainsi que l'intégration des langues locales (moyen terme), puis un assistant IA avec recommandations avancées (long terme), avec une ambition de déploiement à plus grande échelle en Afrique de l'Ouest.

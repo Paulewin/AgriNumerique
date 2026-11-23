@@ -1,0 +1,78 @@
+---
+title: "AgriNumérique — Technology Readiness Level (TRL)"
+subtitle: "Grille d'Évaluation de Maturité Technologique (TRL)"
+author: 
+- "Paule DENAKPO et Bonifacia DEDEGBE"
+- "Deuxième année cohorte 3 Groupe 03"
+date: "15 novembre 2026"
+output:
+  pdf_document: 
+    toc: true
+    latex_engine: xelatex
+    number_sections: true
+  html_document: 
+    toc: true
+    number_sections: true
+---
+
+```{r echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("/cloud/project/documents/logo.jpg")
+```
+
+\newpage
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Synthèse du positionnement TRL du projet
+
+**Niveau TRL atteint ce jour & justification synthétique :**
+
+AgriNumérique se situe au TRL 4 validé, avec des éléments de TRL 5 en cours. Le prototype est déployé en ligne et fonctionne de bout en bout : choix de la langue, saisie de la culture et de la date de semis, génération du calendrier cultural et alertes météo alimentées par une source de données réelle, l'API Open-Meteo. Sa conception répond aux besoins identifiés par l'étude socio-économique de 2025, selon laquelle 95 % des producteurs perçoivent l'impact climatique et 94 % sont équipés en mobile, et la pertinence agronomique a été validée par un test interne mené par les agronomes de l'équipe. Le niveau n'est pas plus élevé, car aucun test n'a encore été réalisé auprès de producteurs réels, dans leurs conditions d'usage (connectivité limitée, langue locale, terrain). Pour progresser, il faut un test pilote avec des producteurs, des données de performance en conditions réelles (fiabilité des alertes, disponibilité) et des retours structurés des utilisateurs cibles.
+
+**Niveau TRL visé à l'issue du pilote MVP :**
+
+À l'issue du pilote MVP, AgriNumérique vise le TRL 6, soit un passage du TRL 4–5 actuel au TRL 6. Le pilote consistera à tester l'application auprès d'un groupe de producteurs de tomates dans une ou plusieurs communes du Bénin, dans leurs conditions réelles d'usage : connectivité limitée, smartphone d'entrée de gamme, langue locale. Il permettra de démontrer le prototype dans un environnement représentatif, de mesurer sa performance (fiabilité des alertes, temps de chargement, disponibilité) et de recueillir les retours structurés des utilisateurs pour corriger l'application. Le TRL 7, qui suppose un déploiement en environnement opérationnel à plus grande échelle, avec les fonctionnalités hors ligne et SMS, sera visé dans une phase ultérieure.
+
+# Grille d'auto-évaluation des 9 niveaux TRL 
+
+| Niveau | Intitulé & définition standard | Statut | Livrables / preuves disponibles sur le projet |
+|---|---|---|---|
+| **TRL 1** | **Principes de base observés** — Observation scientifique initiale, revue bibliographique et formulation du problème. | Validé |  Diagnostic terrain  |
+| **TRL 2** | **Concept technologique formulé** — Architecture de la solution imaginée, hypothèses de modélisation et cas d'usage définis. | Validé |  architecture |
+| **TRL 3** | **Preuve de concept (PoC) expérimentale** — Premiers tests sur données historiques ou échantillon restreint ; validation analytique. | Validé | Scripts R et premiers résultats |
+| **TRL 4** | **Validation en laboratoire / environnement simulé** — Intégration des briques logicielles de base (prototype fonctionnel) testées sur cas simulés. | En cours | Prototype MVP fonctionnel testé |
+| **TRL 5** | **Validation en environnement pertinent** — Test du prototype avec de vraies données terrain et un panel restreint d'utilisateurs pilotes. | À atteindre | Pilote 3-4 semaines avec producteurs |
+| **TRL 6** | **Démonstration en environnement pertinent** — Système complet démontré à l'échelle pilote en conditions réelles d'exploitation. | À atteindre |  Déploiement élargi |
+| **TRL 7** | **Démonstration en environnement opérationnel** — Prototype pré-commercial intégré dans le quotidien réel des producteurs sans assistance. | Hors MVP |Première Version |
+| **TRL 8** | **Système complet et qualifié** — Produit finalisé, testé, sécurisé et conforme aux normes techniques et d'usage. | Hors MVP | Version améliorée |
+| **TRL 9** | **Système prouvé en exploitation réelle** — Solution déployée à grande échelle avec modèle économique opérationnel. | Hors MVP | Déploiement commercial |
+
+# Feuille de route de passage au niveau TRL supérieur
+
+**Verrous technologiques ou scientifiques à lever :**
+
+Pour passer au niveau suivant, il nous reste quelques points à régler. D'abord, nos seuils d'alerte et nos calendriers de culture ont été vérifiés par les agronomes de l'équipe, mais pas encore sur de vraies parcelles, et nous ne savons pas encore à quel point nos alertes sont justes, car la météo que nous utilisons est celle de la commune et peut différer de celle du champ. Ensuite, la version hors ligne et par SMS n'est pas encore développée, alors qu'elle est importante pour les producteurs qui ont peu d'internet, et nous n'avons pas encore testé l'application avec une connexion faible. Enfin, aucun producteur ne l'a encore essayée : nous ne savons pas s'ils comprennent bien l'interface, les messages d'alerte et les langues proposées. Le pilote avec de vrais producteurs nous permettra de vérifier tout cela et de corriger l'application.
+
+**Actions de validation requises & livrables attendus :**
+
+Aujourd'hui, AgriNumérique est un prototype fonctionnel situé entre le TRL 4 et le TRL 5. Notre feuille de route progresse étape par étape. De décembre 2026 à janvier 2027, nous préparons le pilote : définition du protocole, recrutement des producteurs, formation des agronomes et tests en connexion faible, ce qui nous amène au TRL 5. De février à avril 2027, nous testons l'application auprès de producteurs béninois dans leurs conditions réelles d'usage, ce qui doit nous permettre d'atteindre le TRL 6. De mai à juillet 2027, nous intégrons leurs retours pour améliorer l'outil (langues locales, SMS, mode hors ligne, fiches variétés) et qualifier le système, soit le TRL 7. D'août à septembre 2027, nous élargissons le déploiement pour atteindre le TRL 8. Le TRL 9 sera visé au-delà de 2027, une fois la fiabilité de l'application démontrée sur plusieurs campagnes agricoles. Chaque étape s'appuie ainsi sur les résultats de la précédente, ce qui rend la progression à la fois réaliste et vérifiable.
+
+```{r, echo=FALSE, roadmap-table}
+roadmap <- data.frame(
+  "Période" = c("Déc. 2026 – Jan. 2027", "Fév. 2027 – Avr. 2027",
+                "Mai 2027 – Jul. 2027", "Août 2027 – Sept. 2027", "Au-delà de 2027"),
+  "Étape" = c(
+    "Préparation du pilote (protocole, recrutement, formation des agronomes, tests en connexion faible)",
+    "Pilote terrain auprès de producteurs béninois en conditions réelles",
+    "Intégration des retours (langues locales, SMS, hors ligne, fiches variétés) et qualification du système",
+    "Élargissement du déploiement",
+    "Fiabilité démontrée sur plusieurs campagnes agricoles"
+  ),
+  "TRL visé" = c("5", "6", "7", "8", "9"),
+  check.names = FALSE
+)
+
+knitr::kable(roadmap)
+```

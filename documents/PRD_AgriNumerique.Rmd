@@ -1,0 +1,244 @@
+---
+title: "AgriNumérique — Product Requirements Document (PRD)"
+subtitle: "Fiche des Spécifications Produit (PRD)"
+author: 
+- "Paule DENAKPO et Bonifacia DEDEGBE"
+- "Deuxième année Cohorte 3 Groupe 03"
+date: "20 novembre 2026"
+output:
+  pdf_document: 
+    toc: true
+    latex_engine: xelatex
+    number_sections: true
+  html_document:
+    toc: true
+    toc_depth: 3
+    number_sections: true
+---
+
+```{r echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("/cloud/project/documents/logo.jpg")
+```
+
+\newpage
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# Contexte, vision & objectifs du produit
+
+**Contexte et problématique :**
+
+Au Bénin, le changement climatique (sécheresses, pluies irrégulières, inondations, hausse des températures) fait baisser les rendements et multiplie les pertes de récolte. L'étude menée en 2025 auprès des producteurs a montré que :
+
+- 95 % d'entre eux perçoivent ces impacts sur leur production ;
+- les informations climatiques existent mais ne sont ni localisées, ni accessibles, ni actionnables ;
+- les solutions numériques existantes ne sont pas adaptées à leurs réalités (langue, accès Internet limité, faible littératie numérique) ;
+- malgré une forte perception du risque, le niveau d'adaptation reste faible, et la demande pour des solutions simples et accessibles est forte.
+
+Ainsi, l'opportunité est de fournir aux producteurs un outil numérique léger, localisé et actionnable qui transforme l'information climatique brute en décisions concrètes sur le terrain.
+
+**Objectifs produit et résultats attendus :**
+
+Il s'agit de:
+- Traduire les besoins prioritaires identifiés par l'étude (alertes climatiques localisées, calendrier cultural, interface simple et en langues locales) en fonctionnalités concrètes.
+- Développer un prototype (MVP) accessible aux producteurs à faible connectivité et faible littératie numérique.
+- Évaluer la faisabilité technique et l'adéquation du prototype avec les contraintes de terrain.
+- Préparer les phases suivantes (test terrain, passage à l'échelle) en documentant le produit et son niveau de maturité technologique.
+
+AgriNumérique propose au producteur un parcours simple : choisir sa langue, créer un compte, renseigner sa culture et sa date de semis, puis recevoir un calendrier cultural personnalisé ainsi que des alertes météo accompagnées de recommandations concrètes.
+
+## Fonctionnalités principales
+
+Le tableau ci dessous donne un apperçu des fonctionnalités principales de l'application.
+
+| # | Fonctionnalité | Statut |
+|---|---|---|
+| F1 | Sélection de la langue à l'inscription | Implémenté (français) |
+| F2 | Création de compte producteur | Implémenté |
+| F3 | Saisie culture, variété (optionnelle), date de semis | Implémenté |
+| F4 | Génération automatique d'un calendrier cultural personnalisé | Implémenté |
+| F5 | Alertes météo en temps réel (température, pluie, vent) | Implémenté |
+| F6 | Recommandations associées à chaque alerte | Implémenté |
+| F7 | Langues locales (au-delà du français) | Planifié, non livré |
+| F8 | Alertes par SMS | Planifié, non livré |
+| F9 | Mode hors ligne | Planifié, non livré |
+| F10 | Assistant IA / recommandations avancées | Planifié, non livré |
+| F11 | Fiches variétés : noms, images et itinéraire technique pour les différentes variétés de tomate | Prévu, non livré |
+
+**Fonctionnalités Hors périmètre explicite**
+
+Notre version actuelle ne prendra pas en compte les fonctionnalités suivantes :
+
+- Intégration complète des langues locales,
+- fonctionnement hors ligne/SMS,
+- assistant IA,
+- déploiement multi-pays.
+
+Ces éléments figurent dans la feuille de route et seront ajoutés dans les versions à venir.
+
+# Profils utilisateurs (personas) et scénarios d'usage
+
+| Profil / Persona | Contexte & contraintes d'accès | Besoin principal et action clé |
+|---|---|---|
+| **Producteur rural** | Faible accès Internet (35 %), téléphone mobile (94 %), langue locale, faible littératie numérique | Alertes simples et calendrier cultural en langue locale |
+| **Producteur connecté** | Accès Internet régulier, déjà utilisateur de solutions numériques | Recommandations plus fines, suivi multi-cultures |
+
+# Exigences fonctionnelles et user stories (priorisées)
+
+| N° | Fonctionnalité / User Story | Priorité | Critères d'acceptation |
+|---|---|---|---|
+| **01** | En tant qu'utilisateur, je veux choisir ma langue au démarrage, afin de comprendre l'application sans barrière linguistique | **P0 (MVP)** | • Le sélecteur de langue s'affiche dès le premier écran, avant toute autre action. Une fois choisie, la langue s'applique à l'ensemble de l'interface (actuellement : français ; langues locales F7 planifiées, non livrées |
+| **02** | En tant qu'utilisateur, je veux renseigner ma culture et ma date de semis, afin de recevoir un calendrier cultural adapté | **P0 (MVP)** | • Le formulaire propose la culture via une liste déroulante (maïs, tomate, piment) et la date de semis via un sélecteur de date, sans texte libre. Après validation, un calendrier cultural personnalisé est généré automatiquement à partir de ces deux informations et affiché à l'utilisateur. |
+| **03** | En tant qu'utilisateur, je veux recevoir des alertes météo localisées, afin d'anticiper les risques (pluie, sécheresse) sur mes cultures | **P0 (MVP)** | • Chaque alerte déclenchée est accompagnée d'une recommandation concrète affichée immédiatement en dessous. |
+| **04** | En tant qu'utilisateur, je veux des recommandations concrètes à chaque alerte, afin de savoir quoi faire sans expertise technique | **P0 (MVP)** | • À définir après test MVP |
+| **05** | En tant que producteur à faible accès Internet, je veux pouvoir utiliser l'essentiel de l'application hors ligne ou par SMS, afin de ne pas dépendre d'une connexion stable | *(hors MVP actuel)* | — |
+
+# Parcours utilisateur & exigences d'interface
+
+**Enchaînement des écrans**
+
+Le producteur arrive sur la page d'accueil, qui présente l'application où il retrouve le logo du projet. Il renseigne ensuite sa langue, qui détermine le début de l'utilisation de l'outil par le producteur. Suite à cela, il est redirigé sur une autre page où il renseigne : sa commune et le stade de sa culture de tomate (pépinière, repiquage, croissance, floraison, fructification). Ces informations permettent à l'application d'adapter tout le reste à sa parcelle.
+
+À partir de sa localisation, l'application interroge automatiquement l'API Open-Meteo et récupère les données météorologiques de sa zone : températures, précipitations, humidité, prévisions des prochains jours. Le producteur n'a rien à saisir, la météo arrive toute seule.
+
+Ces données passent ensuite par le moteur d'alertes intelligentes. Il les compare aux seuils agronomiques propres à la tomate. Si une chaleur excessive, une pluie forte ou une humidité favorable aux maladies est prévue, une alerte se déclenche, avec un niveau de gravité clair.
+
+Chaque alerte alimente alors le moteur de recommandations agronomiques. Il croise le risque détecté avec le stade de la culture et propose des conseils concrets : quand irriguer, quand traiter, quand protéger les plants ou reporter une intervention.
+
+Enfin, le tableau de bord rassemble l'ensemble : la météo à venir, les alertes actives et les recommandations du jour. Le producteur sait quoi faire, et à quel moment, pour protéger sa récolte.
+
+**Contraintes d'ergonomie et d'accessibilité (UX) :**
+
+*Accessibilité*
+
+- **Langues** : le français ne suffit pas ; on prévoit des langues locales (fon, yoruba, etc.) ou des messages courts avec pictogrammes.
+- **Faible littératie** : on va utiliser des icônes, des couleurs d'alerte (vert, orange, rouge) et des messages très courts.
+- **Connexion limitée** : on envisage une application légère, peu de données consommées, affichage rapide même en 3G. La dernière météo sera gardée en mémoire si le réseau coupe.
+- **Équipement** : usage principal sur smartphone Android d'entrée de gamme, donc interface adaptée aux petits écrans (design responsive).
+- **Coût** : gratuit pour le producteur, idéalement sans inscription longue.
+- **Canaux complémentaires** : alertes par SMS ou WhatsApp pour ceux qui n'ouvrent pas l'app.
+
+*Ergonomie*
+
+- **Parcours court** : 2 à 3 saisies maximum (commune, stade de culture), avec listes déroulantes plutôt que texte libre.
+- Boutons larges et espacés, faciles à utiliser avec les doigts, en plein soleil ou avec les mains sales.
+- **Lisibilité** : gros caractères, contraste fort, vocabulaire agronomique simplifié.
+- **Hiérarchie claire** : l'alerte la plus urgente en premier, avec la recommandation juste en dessous.
+- **Retour visuel** : indicateur de chargement pendant la récupération de la météo, pour éviter le sentiment que l'application est bloquée.
+
+# Données, logique métier et architecture technique
+
+**Données d'entrée (Inputs) :** localisation, culture, variété, date de semis.
+
+**Règles de calcul / Modèle / API :**
+
+Le stade de culture est calculé à partir du nombre de jours après repiquage. Les données Open-Meteo (température, pluie, humidité, vent) sont comparées à des seuils agronomiques propres à la tomate, issus des recommandations du World Vegetable Center et de l'INRAB pour les conditions locales : par exemple, une température maximale supérieure à 35 °C ou une humidité supérieure à 85 % déclenche une alerte orange ou rouge selon la gravité. Le besoin en eau est estimé par la formule ETc = ET0 × Kc, selon la méthode FAO-56, diminuée de la pluie prévue. Chaque alerte est ensuite croisée avec le stade de la culture pour produire un conseil concret, les plus graves s'affichant en premier.
+
+**Données de sortie (Outputs) et stockage :**
+
+- **Bandeau d'alerte** en haut : un code couleur (vert, orange, rouge) avec une icône et une phrase de 10 mots maximum, par exemple « Chaleur forte demain : arrosez tôt le matin ».
+- **Carte « Conseil du jour »** : une seule action prioritaire, adaptée au stade de la culture.
+- **Météo des 3 à 5 prochains jours** : de petites icônes (soleil, pluie) avec la température et la pluie prévues.
+- **Besoin en eau** : un indicateur simple (par exemple une goutte pleine, moitié ou vide) plutôt que des millimètres.
+- **Historique des alertes** : accessible en un clic, mais non affiché par défaut.
+- Pour les producteurs peu connectés ou peu alphabétisés, on ajoutera une version SMS ou WhatsApp du même message, ou une version audio en langue locale.
+
+## Architecture et infrastructure
+
+**Stack technique :** l'application est développée en **R / Shiny**, déployée en version pilote sur shinyapps.io (prototype accessible en ligne). L'hébergement définitif est prévu sur le **serveur du programme de formation**.
+
+**Base de données :** le choix retenu est une base de données SQL légère, **SQLite** — un véritable moteur SQL sans serveur à installer ni administrer (la base est un simple fichier, nativement supporté par R via les packages `RSQLite`/`DBI`), gratuit et sans coût d'hébergement supplémentaire. Ce choix couvre confortablement les volumes attendus pour le pilote et les premières phases de déploiement ; une migration vers un moteur serveur comme PostgreSQL (via `RPostgres`) ne sera envisagée qu'en cas de forte croissance du nombre d'utilisateurs simultanés ou de besoins avancés de concurrence en écriture.
+
+
+# Exigences non fonctionnelles (performance, sécurité, fiabilité)
+
+## Performance et connectivité
+
+- **Réseau faible (2G/3G)** : page légère, peu d'images, graphiques simples. Une seule requête météo par session, pas de rafraîchissement continu.
+- **Coupure réseau** : garde en mémoire la dernière météo récupérée et l'affiche avec la mention « Dernière mise à jour : date/heure ».
+- **Données mobiles limitées** : réduire le volume échangé. Demander à l'API uniquement les variables utiles (température, pluie, humidité, vent) et sur 3 à 5 jours.
+- **Canal de secours** : alertes par SMS ou WhatsApp, qui fonctionnent sans ouvrir l'app.
+- **Temps de chargement** : on vise quelques secondes sur un Android d'entrée de gamme, avec un indicateur de chargement pendant l'appel à Open-Meteo.
+- **Cache des données météo** : une même commune n'est interrogée qu'une fois par heure ou par jour, ce qui accélère l'affichage et limite les appels à l'API.
+- **Calculs légers** : les règles d'alerte sont de simples comparaisons de seuils, donc rapides.
+- **Gestion des erreurs** : si l'API ne répond pas, on affiche un message clair (« Météo indisponible, réessayez ») au lieu d'un écran vide.
+
+## Sécurité et confidentialité
+
+Pour la sécurité des données, en privilégiant des solutions simples, gratuites et faciles à déployer, nous avons établi les paramètres de sécurité ci-après :
+
+1. **Séparer code et données (priorité immédiate)** : le fichier de base ne se trouvera pas dans le dépôt GitHub du projet (actuellement public) — il sera ajouté au `.gitignore`, et conservé uniquement sur le serveur de déploiement. En cas d'imprudence, si des données réelles y ont déjà circulé, on prévoit de purger l'historique Git (`git filter-repo` ou BFG Repo-Cleaner).
+2. Création d'un fichier de base **SQLite** stocké hors du dossier public de l'application, pour plus de sécurité sur les informations renseignées par les utilisateurs.
+3. Minimisation des données collectées et anonymisation (suppression des noms/numéros de téléphone) avant toute analyse agrégée ou tout partage de données.
+
+## Gestion des erreurs et cas particuliers
+
+L'application ne collectera que le minimum de données (commune et stade de culture), sans compte obligatoire, et s'appuiera sur une politique de confidentialité claire, des échanges chiffrés en HTTPS et un accès administrateur sécurisé. Les erreurs sont prévenues par des listes de choix et des contrôles de saisie, avec des messages courts, et la dernière météo sera conservée en cas de panne de l'API. Le code et les données de référence sont sauvegardés régulièrement, et les seuils, cultures, communes et langues se mettent à jour facilement, sans réécrire le programme, ce qui garantit une application fiable et évolutive.
+
+# Dépendances, jalons de développement et plan d'exécution du projet
+
+**Dépendances et prérequis :**
+
+1. **Application** : R / Shiny
+2. **Déploiement** : shinyapps.io
+3. **Données météo** : API Open-Meteo
+4. **Accès au prototype** : <https://6ngdmj-bonifacia-dedegbe.shinyapps.io/AgriNumerique/>
+
+**Jalons de livraison et plan de déroulement des activités pour l'amélioration du MVP :**
+
+Actuellement, nous procédons à un MVP fonctionnel en cours d'amélioration continue. La version finale sera une application mobile facile à utiliser.
+
+Voici ci-dessous le calendrier de déroulement des activités, suivi des métriques de succès de ce projet.
+
+```{r, echo=FALSE, calendrier}
+calendrier <- data.frame(
+  "Période" = c("Déc. 2026 – Jan. 2027", "Fév. 2027 – Avr. 2027",
+                "Mai 2027 – Jul. 2027", "Août 2027 – Sept. 2027"),
+  "Phase" = c("Préparation du pilote", "Pilote terrain",
+              "Itération et qualification", "Déploiement opérationnel"),
+  "Livrable" = c(
+    "Protocole de test, recrutement des producteurs partenaires, formation des agronomes de terrain",
+    "Déploiement auprès d'un groupe de producteurs réels au Bénin, collecte de données d'usage en conditions réelles",
+    "Intégration des retours du pilote (langues locales F7, SMS F8, mode hors ligne F9, fiches variétés F11), qualification complète du système",
+    "Extension à un périmètre plus large de producteurs, validation en conditions réelles sur la durée"
+  ),
+  "TRL visé" = c("6 (préparation)", "7", "8", "9"),
+  check.names = FALSE
+)
+
+knitr::kable(calendrier, caption = "Tableau abordant le calendrier d'évolution des activités.")
+```
+
+**Métriques de succès :**
+
+```{r, echo=FALSE, metriques}
+metriques <- data.frame(
+  "Métrique" = c(
+    "Taux d'adoption (comptes créés / producteurs invités au pilote)",
+    "Taux de rétention à 1 mois",
+    "Taux de rétention sur 1 saison complète",
+    "Taux de satisfaction déclaré (enquête post-pilote)",
+    "Alertes consultées suivies d'une action rapportée"
+  ),
+  "Cible" = c(
+    "≥ 70 %",
+    "≥ 50 % des comptes créés restent actifs",
+    "≥ 30 %",
+    "≥ 70 % de réponses satisfaites ou très satisfaites",
+    "≥ 60 %"
+  ),
+  "Échéance" = c(
+    "Fin du pilote terrain (avr. 2027)",
+    "Avr. 2027",
+    "Jul. 2027",
+    "Jul. 2027",
+    "En continu à partir du pilote"
+  ),
+  check.names = FALSE
+)
+
+knitr::kable(metriques)
+```
